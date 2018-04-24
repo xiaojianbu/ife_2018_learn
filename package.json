@@ -1,0 +1,13 @@
+{
+  "name": "ife_2018_learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/xiaojianbu/ife_2018_learn.git",
+  "author": "xiaojianbu",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+}
