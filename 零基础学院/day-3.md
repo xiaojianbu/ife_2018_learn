@@ -34,7 +34,7 @@ p {
 * 浏览器将 HTML 与 CSS 转化成 DOM。把文档内容与样式结合在一起。
 * 浏览器显示 DOM 的内容。
 
-![image]()
+![image](https://github.com/xiaojianbu/ife_2018_learn/raw/master/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E9%99%A2/assets/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B.png)
 
 ### CSS 应用到 HTML
 
