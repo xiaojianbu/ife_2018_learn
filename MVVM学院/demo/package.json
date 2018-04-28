@@ -12,7 +12,9 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-alloy": "^1.4.2",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "san-loader": "^0.0.7",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
@@ -22,7 +24,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.10",
-    "san": "^3.5.7"
+    "san": "^3.5.7",
+    "san-router": "^1.2.0"
   },
   "scripts": {
     "dev": "webpack-dev-server --open --config config/webpack.dev.js",
