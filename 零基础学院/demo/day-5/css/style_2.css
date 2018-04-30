@@ -1,0 +1,42 @@
+.info p,
+.contact-info p {
+  float: left;
+  margin-top: 0;
+  margin-right: 50px;
+}
+
+span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+section {
+  overflow: auto;
+}
+
+main {
+  overflow: hidden;
+}
+
+.clear-fix {
+  clear: both;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  padding-top: 80px;
+  float: left;
+  width: 245px;
+  height: 100%;
+  background-color: #65a5fa;
+  margin-bottom: -3000px;
+  padding-bottom: 3000px;
+}
+
+h1 + div {
+  margin-left: 275px;
+  margin-bottom: -3000px;
+  padding-bottom: 3000px;
+}
