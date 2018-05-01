@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <p>class方式</p>
+    <div on-click="toggleStyle" class="testDiv  {{red ? 'red' : 'blue'}}"></div>
+    <p>style方式</p>
+    <div on-click="toggleStyle" class="testDiv" style="{{backgroundColor ? 'background-color:' + backgroundColor : ''}}"></div>
+  </div>
+</template>
+
+<script>
+  export default {
+    initData() {
+      return {
+        red: true,
+        backgroundColor: 'red'
+      }
+    },
+    toggleStyle() {
+      var red = this.data.get('red')
+      var backgroundColor = this.data.get('backgroundColor')
+      this.data.set('red', !red)
+      if (backgroundColor === 'red') {
+        this.data.set('backgroundColor', 'blue')
+      } else {
+        this.data.set('backgroundColor', 'red')
+      }
+    }
+  }
+</script>
+
+<style>
+  .testDiv {
+    width: 100px;
+    height: 100px;
+    user-select: none;
+  }
+  .red {
+    background-color: red;
+  }
+  .blue {
+    background-color: blue;
+  }
+</style>
