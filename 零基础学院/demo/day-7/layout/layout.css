@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+}
+
+.title {
+  background-color: #333;
+  color: #fff;
+}
+
+.col {
+  height: 100px;
+}
+
+.left {
+  background-color: aqua;
+}
+
+.center {
+  background-color: #f00;
+}
+
+.right {
+  background-color: bisque;
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+/* 实现一个两栏布局，左侧占30%宽度，右侧占70%宽度 */
+.container {
+  border: 1px solid #eee;
+  overflow: auto;
+  position: relative;
+}
+
+.col-2-float-left {
+  width: 30%;
+  float: left;
+}
+
+.col-2-float-right {
+  width: 70%;
+  overflow: auto;
+}
+
+.col-2-position-left {
+  width: 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.col-2-position-right {
+  width: 70%;
+  margin-left: 30%;
+}
+
+.flexbox-container {
+  display: flex;
+  border: 1px solid #eee;
+}
+
+.col-2-flexbox-left {
+  width: 30%;
+}
+.col-2-flexbox-right {
+  width: 70%;
+}
+
+/* 实现一个两栏布局，左侧固定宽度，右侧根据浏览器宽度进行自适应变化 */
+
+.col-2-fixed-float-left {
+  width: 200px;
+  float: left;
+}
+
+.col-2-fixed-float-right {
+  overflow: auto;
+}
+
+.col-2-fixed-position-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+
+.col-2-fixed-position-right {
+  margin-left: 200px;
+}
+
+.col-2-fixed-flexbox-left {
+  width: 200px;
+}
+
+.col-2-fixed-flexbox-right {
+  flex-grow: 1;
+}
+
+/* 实现一个两栏布局，右侧固定宽度，左侧根据浏览器宽度进行自适应变化 */
+
+.col-2-fixed-float-left-1 {
+  float: left;
+  width: calc(100% - 200px);
+}
+
+.col-2-fixed-float-right-1 {
+  float: right;
+  width: 200px;
+}
+
+.col-2-fixed-position-left-1 {
+  margin-right: 200px;
+}
+
+.col-2-fixed-position-right-1 {
+  width: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.col-2-fixed-flexbox-left-1 {
+  flex-grow: 1;
+}
+
+.col-2-fixed-flexbox-right-1 {
+  width: 200px;
+}
+
+/* 实现一个三栏布局，左侧固定宽度，右侧固定宽度，中间部分宽度随浏览器宽度变化而自适应变化 */
+
+.col-3-main,
+.col-3-float-left,
+.col-3-float-right {
+  float: left;
+}
+
+.col-3-float-left,
+.col-3-float-right {
+  width: 200px;
+}
+
+.col-3-main {
+  width: 100%;
+}
+
+.col-3-float-center {
+  margin: 0 200px;
+}
+
+.col-3-float-left {
+  margin-left: -100%;
+}
+
+.col-3-float-right {
+  margin-left: -200px;
+}
+
+.col-3-position-center {
+  margin: 0 200px;
+}
+
+.col-3-position-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+
+.col-3-position-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+}
+
+.col-3-flexbox-center {
+  flex-grow: 1;
+  order: 2;
+}
+
+.col-3-flexbox-left {
+  width: 200px;
+  order: 1;
+}
+
+.col-3-flexbox-right {
+  width: 200px;
+  order: 3;
+}
+
+/* 实现一个三栏布局，左侧固定宽度，中间固定宽度，右侧根据浏览器宽度变化而自适应变化 */
+
+.col-3-float-left-1,
+.col-3-float-center-1 {
+  float: left;
+  width: 200px;
+}
+
+.col-3-float-right-1 {
+  width: calc(100% - 400px);
+  overflow: auto;
+}
+
+.col-3-position-left-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+}
+
+.col-3-position-center-1 {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  width: 200px;
+}
+
+.col-3-position-right-1 {
+  margin-left: 400px;
+}
+
+.col-3-flexbox-left-1,
+.col-3-flexbox-center-1 {
+  width: 200px;
+}
+
+.col-3-flexbox-right-1 {
+  flex-grow: 1;
+}

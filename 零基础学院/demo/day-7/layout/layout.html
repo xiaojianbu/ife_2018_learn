@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Layout</title>
+  <link rel="stylesheet" href="layout.css">
+</head>
+
+<body>
+  <section>
+    <p class="title">实现一个两栏布局，左侧占30%宽度，右侧占70%宽度</p>
+    <p>Float实现</p>
+    <div class="container">
+      <div class="col-2-float-left col left"></div>
+      <div class="col-2-float-right col right"></div>
+    </div>
+    <p>Position实现</p>
+    <div class="container">
+      <div class="col-2-position-left col left"></div>
+      <div class="col-2-position-right col right"></div>
+    </div>
+    <p>Flexbox实现</p>
+    <div class="flexbox-container">
+      <div class="col-2-flexbox-left col left"></div>
+      <div class="col-2-flexbox-right col right"></div>
+    </div>
+  </section>
+  <section>
+    <p class="title">实现一个两栏布局，左侧固定宽度，右侧根据浏览器宽度进行自适应变化</p>
+    <p>Float实现</p>
+    <div class="container">
+      <div class="col-2-fixed-float-left col left"></div>
+      <div class="col-2-fixed-float-right col right"></div>
+    </div>
+    <p>Position实现</p>
+    <div class="container">
+      <div class="col-2-fixed-position-left col left"></div>
+      <div class="col-2-fixed-position-right col right"></div>
+    </div>
+    <p>Flexbox实现</p>
+    <div class="flexbox-container">
+      <div class="col-2-fixed-flexbox-left col left"></div>
+      <div class="col-2-fixed-flexbox-right col right"></div>
+    </div>
+  </section>
+  <section>
+    <p class="title">实现一个两栏布局，右侧固定宽度，左侧根据浏览器宽度进行自适应变化</p>
+    <p>Float实现</p>
+    <div class="container">
+      <div class="col-2-fixed-float-left-1 col left"></div>
+      <div class="col-2-fixed-float-right-1 col right"></div>
+    </div>
+    <p>Position实现</p>
+    <div class="container">
+      <div class="col-2-fixed-position-left-1 col left"></div>
+      <div class="col-2-fixed-position-right-1 col right"></div>
+    </div>
+    <p>Flexbox实现</p>
+    <div class="flexbox-container">
+      <div class="col-2-fixed-flexbox-left-1 col left"></div>
+      <div class="col-2-fixed-flexbox-right-1 col right"></div>
+    </div>
+  </section>
+  <section>
+    <p class="title">实现一个三栏布局，左侧固定宽度，右侧固定宽度，中间部分宽度随浏览器宽度变化而自适应变化</p>
+    <p>Float实现</p>
+    <div class="container">
+      <div class="col-3-main">
+        <div class="col-3-float-center col center"></div>
+      </div>
+      <div class="col-3-float-left col left"></div>
+      <div class="col-3-float-right col right"></div>
+    </div>
+    <p>Position实现</p>
+    <div class="container">
+      <div class="col-3-position-center col center"></div>
+      <div class="col-3-position-left col left"></div>
+      <div class="col-3-position-right col right"></div>
+    </div>
+    <p>Flexbox实现</p>
+    <div class="flexbox-container">
+      <div class="col-3-flexbox-center col center"></div>
+      <div class="col-3-flexbox-left col left"></div>
+      <div class="col-3-flexbox-right col right"></div>
+    </div>
+  </section>
+  <section>
+    <p class="title">实现一个三栏布局，左侧固定宽度，中间固定宽度，右侧根据浏览器宽度变化而自适应变化</p>
+    <p>Float实现</p>
+    <div class="container">
+      <div class="col-3-float-left-1 col left"></div>
+      <div class="col-3-float-center-1 col center"></div>
+      <div class="col-3-float-right-1 col right"></div>
+    </div>
+    <p>Position实现</p>
+    <div class="container">
+      <div class="col-3-position-left-1 col left"></div>
+      <div class="col-3-position-center-1 col center"></div>
+      <div class="col-3-position-right-1 col right"></div>
+    </div>
+    <p>Flexbox实现</p>
+    <div class="flexbox-container">
+      <div class="col-3-flexbox-left-1 col left"></div>
+      <div class="col-3-flexbox-center-1 col center"></div>
+      <div class="col-3-flexbox-right-1 col right"></div>
+    </div>
+  </section>
+</body>
+
+</html>
