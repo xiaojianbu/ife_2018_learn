@@ -7,9 +7,9 @@
             信息：<button on-click="clear">移除信息</button>
         </div>
         <div>
-            <p>姓名：<span>{{person.name}}</span></p>
-            <p>年龄：<span>{{person.age | formatAge}}</span></p>
-            <p>简介：<span>{{person.des}}</span></p>
+            <p>姓名：<span class="info">{{person.name}}</span></p>
+            <p>年龄：<span class="info">{{person.age | formatAge}}</span></p>
+            <p>简介：<span class="info">{{person.des}}</span></p>
         </div>
     </div>
 </template>
@@ -41,4 +41,10 @@
 </script>
 
 <style>
+    .info {
+      display: inline-block;
+      min-width: 50px;
+      border-bottom: 1px solid #000;
+      margin-left: 10px;
+    }
 </style>
