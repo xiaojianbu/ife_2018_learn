@@ -121,10 +121,10 @@ li.banner-active {
 }
 
 .item {
-  /* height: 175px; */
+  font-size: 14px;
   padding: 80px;
   border: 1px solid #ccc;
-  flex: 1;
+  flex: auto;
   margin-right: 10px;
   margin-bottom: 10px;
   text-align: center;
