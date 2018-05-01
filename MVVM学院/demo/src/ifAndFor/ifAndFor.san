@@ -1,0 +1,67 @@
+<template>
+  <div>
+    <button on-click="add">添加</button>
+    <table>
+      <tr>
+        <th>姓名</th>
+        <th>审核状态</th>
+        <th>操作</th>
+      </tr>
+      <tr s-for="item, index in items">
+        <td>{{item.name}}</td>
+        <td>{{item.status}}</td>
+        <td><button on-click="operate(item, index)">{{item.operateText}}</button></td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+  export default {
+    initData() {
+      return {
+        items: [
+          { name: '张三', status: '合格', operateText: '删除' },
+          { name: '李四', status: '不合格', operateText: '删除' },
+          { name: '王五', status: '待审核', operateText: '审核' },
+          { name: '赵六', status: '待审核', operateText: '审核' },
+          { name: '孙七', status: '待审核', operateText: '审核' }
+        ]
+      }
+    },
+    add() {
+      this.data.push('items', { name: 'ife', status: '待审核', operateText: '审核' })
+    },
+    operate(item, index) {
+      if (item.operateText === '删除') {
+        this.data.removeAt('items', index)
+      } else if (item.operateText === '审核') {
+        this.data.set(`items[${index}].status`, '合格')
+        this.data.set(`items[${index}].operateText`, '删除')
+      }
+    }
+  }
+</script>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  table {
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid #000;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: center;
+  }
+</style>
