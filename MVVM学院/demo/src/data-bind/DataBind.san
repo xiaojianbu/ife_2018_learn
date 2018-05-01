@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <input type="text" placeholder="姓名（string）" value="{= person.name =}">
+        <input type="text" placeholder="年龄（number）" value="{= person.age | formatAge =}">
+        <input type="text" placeholder="简介（string）" value="{= person.des =}">
+        <div>
+            信息：<button on-click="clear">移除信息</button>
+        </div>
+        <div>
+            <p>姓名：<span>{{person.name}}</span></p>
+            <p>年龄：<span>{{person.age | formatAge}}</span></p>
+            <p>简介：<span>{{person.des}}</span></p>
+        </div>
+    </div>
+</template>
+
+<script>
+    import san, { DataTypes } from 'san'
+
+    export default {
+        initData() {
+            return {
+                person: {
+                    name: undefined,
+                    age: undefined,
+                    des: undefined
+                }
+            };
+        },
+        filters: {
+            formatAge(age) {
+                return isNaN(parseInt(this.data.get('person.age'))) ? undefined : parseInt(this.data.get('person.age'))
+            }
+        },
+        clear() {
+            this.data.set('person.name', undefined)
+            this.data.set('person.age', undefined)
+            this.data.set('person.des', undefined)
+        }
+    }
+</script>
+
+<style>
+</style>
