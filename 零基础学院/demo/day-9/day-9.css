@@ -1,0 +1,616 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, sans-serif;
+}
+
+header {
+  height: 990px;
+  background-image: url('./images/header.png');
+  position: relative;
+  padding-top: 200px;
+}
+
+header p.title {
+  text-align: center;
+  margin-bottom: 65px;
+  color: #fff;
+  font-size: 62px;
+  line-height: 72px;
+}
+
+header p.title-info {
+  width: 800px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 32px;
+  text-align-last: center;
+}
+
+.create-account {
+  width: 970px;
+  height: 250px;
+  padding-top: 50px;
+  padding-right: 100px;
+  padding-left: 100px;
+  margin: 0 auto;
+  border: 1px solid #54524d;
+  font-size: 0;
+}
+
+.create-account .create-account-title {
+  font-size: 16px;
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.create-account .create-account-info {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.create-account input {
+  width: 291px;
+  height: 50px;
+  margin-right: 30px;
+  border: 1px solid #51504c;
+  background-color: rgba(255, 255, 255, 0);
+  padding-left: 20px;
+}
+
+.create-account input:nth-of-type(1)::placeholder {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.create-account button {
+  width: 125px;
+  height: 50px;
+  color: #000;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: bold;
+}
+
+.awesome {
+  height: 710px;
+  padding-top: 80px;
+}
+
+.awesome .title {
+  text-align: center;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.awesome .info {
+  width: 770px;
+  margin: 0 auto;
+  text-align-last: center;
+  font-size: 42px;
+  line-height: 52px;
+  font-weight: bold;
+  margin-bottom: 65px;
+}
+
+.awesome-items {
+  width: 1100px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.awesome .item {
+  width: 430px;
+  height: 120px;
+  float: left;
+  margin-bottom: 65px;
+}
+
+.awesome .item:nth-of-type(odd) {
+  margin-right: 200px;
+}
+
+.awesome .item .icon {
+  float: left;
+  margin-right: 25px;
+  margin-top: 8px;
+}
+
+.awesome .item .phone {
+  background: url('./images/Iphone-Icon.png');
+  width: 30px;
+  height: 49px;
+}
+
+.awesome .item .check-icon {
+  width: 38px;
+  height: 38px;
+  background: url('./images/Check-Icon.png');
+}
+
+.awesome .item .pencil-icon {
+  width: 48px;
+  height: 48px;
+  background: url('./images/Pencil-Icon.png');
+}
+
+.awesome .item .settings-icon {
+  width: 50px;
+  height: 45px;
+  background: url('./images/Settings-Icon.png');
+}
+
+.awesome-items .item .decs {
+  overflow: auto;
+}
+
+.awesome-items .item .decs .item-title {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.awesome-items .item .decs .item-info {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.policy {
+  height: 800px;
+  background-image: url('./images/action-background.png');
+  padding-top: 180px;
+  padding-left: 315px;
+  position: relative;
+}
+
+.policy p:nth-of-type(1) {
+  width: 400px;
+  color: #fff;
+  font-size: 42px;
+  line-height: 52px;
+  margin-bottom: 30px;
+}
+
+.policy p:nth-of-type(2) {
+  width: 400px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 40px;
+}
+
+.policy button {
+  width: 240px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.policy button:nth-of-type(2) {
+  margin-left: 30px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid #ccc;
+}
+
+.ipad-background {
+  width: 644px;
+  height: 600px;
+  background-image: url('./images/Ipad-Screen.png');
+  position: absolute;
+  right: 0;
+  top: 100px;
+}
+
+.product {
+  height: 580px;
+  padding-top: 90px;
+}
+
+.product-title {
+  font-size: 42px;
+  line-height: 52px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 60px;
+}
+
+.product-items {
+  width: 970px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-item {
+  width: 256px;
+  font-size: 16px;
+  line-height: 26px;
+  text-align-last: center;
+}
+
+.singleton {
+  width: 120px;
+  height: 35px;
+  margin: 0 0 25px 60px;
+  background-image: url('./images/Singleton.png');
+}
+
+.hero {
+  width: 75px;
+  height: 34px;
+  margin: 0 0 25px 60px;
+  background-image: url('./images/Hero.png');
+}
+
+.portland {
+  width: 115px;
+  height: 30px;
+  margin: 0 0 25px 60px;
+  background-image: url('./images/Portland.png');
+}
+
+.learn {
+  height: 1000px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding-top: 115px;
+}
+
+.learn-container {
+  width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.learn-container-decs {
+  width: 320px;
+}
+
+.photo-1 {
+  width: 570px;
+  height: 350px;
+  margin-right: 90px;
+  background-image: url('./images/Photo-1.png');
+  margin-bottom: 80px;
+}
+
+.photo-2 {
+  width: 570px;
+  height: 350px;
+  background-image: url('./images/Photo-2.png');
+  margin-left: 70px;
+}
+
+.learn-container-title {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.learn-container-info {
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.awesome-crew {
+  height: 1084px;
+  padding-top: 95px;
+  border-bottom: 1px solid #eee;
+}
+
+.awesome-crew-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 42px;
+  line-height: 52px;
+  font-weight: bold;
+}
+
+.awesome-crew-info {
+  width: 710px;
+  margin: 0 auto;
+  text-align-last: center;
+  margin-bottom: 60px;
+}
+
+.crew-container {
+  display: flex;
+  flex-flow: wrap;
+  width: 980px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.crew-item {
+  width: 470px;
+  height: 340px;
+  margin-bottom: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.crew-item-hover {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
+}
+
+.crew-item:hover .crew-item-hover {
+  display: block;
+}
+
+.crew-item-title {
+  font-size: 20px;
+  line-height: 32px;
+  color: #fff;
+  text-align: center;
+}
+
+.crew-item-info {
+  font-size: 12px;
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.crew-item-hover .icon-container {
+  width: 220px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 51px;
+  height: 54px;
+}
+
+.facebook-icon {
+  background-image: url('./images/Facebook.png');
+}
+
+.twitter-icon {
+  background-image: url('./images/Twitter.png');
+}
+
+.instagram-icon {
+  background-image: url('./images/Instagram.png');
+}
+
+.zhang {
+  background-image: url('./images/张思远大.png');
+}
+
+.qian {
+  background-image: url('./images/2.png');
+}
+
+.duan {
+  background-image: url('./images/3.png');
+}
+
+.shen {
+  background-image: url('./images/沈大师大_meitu_3.png');
+}
+
+.contacts {
+  height: 700px;
+  padding-top: 70px;
+}
+
+.contacts-form {
+  width: 470px;
+  height: 560px;
+  float: left;
+  margin-left: 315px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 45px 50px 65px 50px;
+}
+
+.contacts-form-title {
+  text-align: center;
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.contacts-form input {
+  width: 370px;
+  height: 50px;
+  border: 1px solid #ccc;
+  margin-bottom: 25px;
+  padding: 20px;
+}
+
+.contacts-form textarea {
+  width: 370px;
+  height: 145px;
+  border: 1px solid #ccc;
+  margin-bottom: 25px;
+  padding: 20px;
+}
+
+.contacts-form button {
+  width: 370px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border: 0;
+}
+
+.contacts-info {
+  width: 475px;
+  overflow: auto;
+  padding-top: 75px;
+  padding-left: 120px;
+}
+
+.contacts-info-title {
+  font-size: 42px;
+  line-height: 52px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.contacts-info-decs {
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 60px;
+}
+
+.map-info {
+  margin-bottom: 20px;
+}
+
+.phone-info {
+  margin-bottom: 20px;
+}
+
+.contacts-info .icon {
+  float: left;
+  margin-right: 15px;
+}
+
+.contacts-info .icon + div {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: bold;
+  overflow: auto;
+}
+
+.contacts-info .icon ~ p {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.map-icon {
+  width: 18px;
+  height: 25px;
+  margin-top: 10px;
+  background-image: url('./images/Map-Icon.png');
+}
+
+.phone-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('./images/Phone-Icon.png');
+}
+
+.email-icon {
+  width: 24px;
+  height: 18px;
+  background-image: url('./images/Mail-Icon.png');
+}
+
+footer {
+  height: 410px;
+  background-color: #000;
+}
+
+.footer-items {
+  width: 1200px;
+  padding-top: 80px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-item {
+  width: 285px;
+}
+
+.footer-item-title {
+  text-align: left;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.footer-item-info {
+  text-align: left;
+  font-size: 16px;
+  line-height: 46px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-item-info-1 {
+  text-align: left;
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-icons .twitter {
+  width: 17px;
+  height: 14px;
+  background-image: url('./images/Twitter-Icon.png');
+  opacity: 0.4;
+}
+
+.footer-icons .facebook {
+  width: 9px;
+  height: 18px;
+  background-image: url('./images/Facebook-Icon.png');
+  opacity: 0.4;
+}
+
+.footer-icons .google {
+  width: 16px;
+  height: 15px;
+  background-image: url('./images/Google-Icon.png');
+  opacity: 0.4;
+}
+
+.footer-icons .tumble {
+  width: 10px;
+  height: 15px;
+  background-image: url('./images/Tumbler-Icon.png');
+  opacity: 0.4;
+}
+
+.footer-icons .pinterest {
+  width: 13px;
+  height: 17px;
+  background-image: url('./images/Pinterest-Icon.png');
+  opacity: 0.4;
+}
+
+.footer-icons .linkedIn {
+  width: 16px;
+  height: 15px;
+  background-image: url('./images/LinkedIn-Icon.png');
+  opacity: 0.4;
+}
