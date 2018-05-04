@@ -1,0 +1,45 @@
+<template>
+  <div>
+  <ui-child on-notice="showMsg" inputText="{{msg}}"></ui-child>
+  <div class="{{haveMsg ? 'father': ''}}">
+    我是父组件：
+    <span s-if="showText" on-click="showInput">{{ msg ? msg : '静静等待用户输入' }}</span>
+    <input s-else type="text" value="{= msg =}" on-blur="showText"/>
+  </div>
+  </div>
+</template>
+
+<script>
+  import san from 'san'
+  import Child from './Child.san'
+
+  export default {
+    initData() {
+      return {
+        msg: '',
+        haveMsg: false,
+        showText: true
+      }
+    },
+    components: {
+      'ui-child': Child
+    },
+    showMsg(message) {
+      this.data.set('msg', message)
+      this.data.set('haveMsg', true)
+    },
+    showInput() {
+      this.data.set('showText', false)
+    },
+    showText() {
+      this.data.set('showText', true)
+    }
+  }
+</script>
+
+<style>
+  .father {
+    color: rgb(100, 240, 113);
+  }
+</style>
+

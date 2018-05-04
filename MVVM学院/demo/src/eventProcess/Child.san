@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <label for="child">子组件：</label>
+    <input id="child" value="{= inputText =}"/>
+    <button on-click="noticeFather">通知父组件</button>
+  </div>
+</template>
+
+<script>
+  import san from 'san'
+  export default {
+    initData() {
+      return {
+        inputText: undefined
+      }
+    },
+    noticeFather() {
+      this.fire('notice', this.data.get('inputText'))
+      this.dispatch('UI:input-msg', this.data.get('inputText'))
+    }
+  }
+</script>
+

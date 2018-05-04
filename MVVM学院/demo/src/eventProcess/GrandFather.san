@@ -1,0 +1,35 @@
+<template>
+  <div>
+  <ui-father></ui-father>
+  <div class="{{haveMsg ? 'grandFather': ''}}">我是更高层父组件：{{ msg }}</div>
+  </div>
+</template>
+
+<script>
+  import san from 'san'
+  import Father from './Father.san'
+
+  export default {
+    initData() {
+      return {
+        msg: '我也静静等待用户输入',
+        haveMsg: false
+      }
+    },
+    components: {
+      'ui-father': Father
+    },
+    messages: {
+      'UI:input-msg': function (arg) {
+        this.data.set('msg', arg.value)
+        this.data.set('haveMsg', true)
+      }
+    }
+  }
+</script>
+
+<style>
+  .grandFather {
+    color: rgb(253, 179, 244);
+  }
+</style>
