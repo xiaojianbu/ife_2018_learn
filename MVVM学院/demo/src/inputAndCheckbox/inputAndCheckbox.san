@@ -3,7 +3,7 @@
     <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput"/>
     <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput" disabled="{{disabled}}"/>   
     <san-input class="sanInput" value="{{value1}}" placeholder="请输入用户名" on-input="handleInput" readonly="{{readonly}}"/>
-    <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-blur="handleBlur" class="sanInput {{showError ? 'error' : ''}}" />
+    <san-input value="{{value}}" placeholder="请输入ife" on-input="handleInput" on-blur="handleBlur" class="sanInput {{showError ? 'error' : ''}}" />
     <span class="{{showError ? 'errorText' : 'notShow' }}">请输入ife</span> 
     <div class="{{showTooltip ? 'showTooltip' : ''}}">
       <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-focus="handleFocus" on-blur="handleBlur"/>
@@ -79,7 +79,6 @@
       'san-checkbox': SanCheckbox
     },
     handleInput(value) {
-      console.log('asd')
       this.data.set('value', value)
     },
     handleBlur() {
@@ -95,10 +94,10 @@
       this.data.set('showTooltip', true)
     },
     handleChange(value) {
-      console.log('1', value)
+      console.log(value)
     },
     handleChange1(value) {
-      console.log('1', value)
+      console.log(value)
     }
   }
 </script>
