@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput"/>
-    <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" disabled="{{disabled}}"/>   
-    <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-blur="handleBlur" class="{{showError ? 'error' : ''}}" />
-    <span class="{{showError ? 'errorText' : 'notShow' }}">错误提示文案</span> 
+  <div class="main">
+    <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput"/>
+    <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput" disabled="{{disabled}}"/>   
+    <san-input class="sanInput" value="{{value1}}" placeholder="请输入用户名" on-input="handleInput" readonly="{{readonly}}"/>
+    <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-blur="handleBlur" class="sanInput {{showError ? 'error' : ''}}" />
+    <span class="{{showError ? 'errorText' : 'notShow' }}">请输入ife</span> 
     <div class="{{showTooltip ? 'showTooltip' : ''}}">
-      <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-focus="handleFocus"/>
+      <san-input class="sanInput" value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-focus="handleFocus" on-blur="handleBlur"/>
     </div> 
     <div class="checkbox-container">
       <san-checkbox checked="{=checked=}" on-change="handleChange">
@@ -24,6 +25,29 @@
       部分必选
       </san-checkbox>
     </div>
+    <div class="checkbox-container">
+      <san-checkbox small checked="{=checked=}" on-change="handleChange">
+      常态
+      </san-checkbox>
+      <san-checkbox small checked="{=checked1=}" disabled="{{disabled}}">
+      失效
+      </san-checkbox>
+      <san-checkbox small checked="{=checked2=}" indeterminate="{{indeterminate}}">
+      部分选中
+      </san-checkbox>
+      <san-checkbox small checked="{=checked3=}" disabled="{{disabled}}">
+      必选
+      </san-checkbox>
+      <san-checkbox small checked="{=checked4=}" indeterminate="{{indeterminate}}" disabled="{{disabled}}">
+      部分必选
+      </san-checkbox>
+    </div>
+    <div class="checkbox-container">
+      <p>trueValue falseValue </p>
+      <san-checkbox trueValue="trueValue" falseValue="falseValue" checked="{=checked5=}" on-change="handleChange1">
+      常态
+      </san-checkbox>
+    </div>
   </div>
 </template>
 
@@ -36,11 +60,14 @@
     initData() {
       return {
         value: undefined,
+        value1: '只读',
+        readonly: true,
         checked: false,
         checked1: false,
         checked2: false,
         checked3: true,
         checked4: false,
+        checked5: false,
         indeterminate: true,
         disabled: true,
         showError: false,
@@ -69,11 +96,21 @@
     },
     handleChange(value) {
       console.log('1', value)
+    },
+    handleChange1(value) {
+      console.log('1', value)
     }
   }
 </script>
 
 <style>
+  .main {
+    width: 800px;
+    margin: 0 auto;
+  }
+  .sanInput {
+    margin: 10px;
+  }
   .checkbox-container {
     margin-top: 40px;
   }

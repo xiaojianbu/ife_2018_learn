@@ -1,6 +1,6 @@
 <template>
-  <label class="{{ mainClass }}" on-click="checkboxClick">
-    <span class="checkbox-input" class="{{ sanCheckboxInput }}">
+  <label class="{{ mainClass }}">
+    <span class="checkbox-input">
       <span class="checkbox-inner"></span>
       <input type="checkbox" class="checkbox-original" s-if="trueValue || falseValue" disabled="{{ disabled }}" checked="{{=value=}}" on-change="change">
       <input type="checkbox" class="checkbox-original" s-else disabled="{{ disabled }}" checked="{{=value=}}" on-change="change">
@@ -22,7 +22,8 @@
         trueValue: undefined,
         falseValue: undefined,
         indeterminate: false,
-        isChecked: false
+        isChecked: false,
+        small: undefined
       }
     },
     computed: {
@@ -31,6 +32,9 @@
         const checked = this.data.get('checked')
         const disabled = this.data.get('disabled')
         const indeterminate = this.data.get('indeterminate')
+        const small = this.data.get('small')
+
+
         if (checked) {
           klass.push('is-checked')
         }
@@ -46,30 +50,32 @@
         if (!checked && indeterminate) {
           klass.push('is-indeterminate')
         }
+
+        if (small !== undefined) {
+          klass.push('is-small')
+        }
+
         return klass
       }
     },
     change() {
       const checked = this.data.get('checked')
       const disabled = this.data.get('disabled')
-      
-      if(!disabled){
+      const trueValue = this.data.get('trueValue')
+      const falseValue = this.data.get('falseValue')
+
+      if (!disabled) {
         this.data.set('checked', !checked)
-        this.fire('change', this.data.get('checked'))
+        if (trueValue || falseValue) {
+          if (checked) {
+            this.fire('change', this.data.get('falseValue'))
+          } else {
+            this.fire('change', this.data.get('trueValue'))
+          }
+        } else {
+          this.fire('change', this.data.get('checked'))
+        }
       }
-    },
-    checkboxClick() {
-      this.change()
-      // const checked = this.data.get('checked')
-      // const disabled = this.data.get('disabled')
-      // if (!disabled) {
-      //   if (checked) {
-      //     this.data.set('checked', false)
-      //   } else {
-      //     this.data.set('checked', true)
-      //   }
-      //   this.fire('change', this.data.get('checked'))
-      // }
     }
   }
 </script>
@@ -194,5 +200,17 @@
     left: 0;
     right: 0;
     top: 5px;
+  }
+
+  .checkbox.is-small .checkbox-inner {
+    width: 10px;
+    height: 10px;
+  }
+  .checkbox.is-small .checkbox-inner::after {
+    height: 5px;
+    left: 2px;
+  }
+  .checkbox.is-small .checkbox-inner:before {
+    top: 3px;
   }
 </style>
