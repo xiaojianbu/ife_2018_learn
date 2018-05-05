@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <input type="checkbox" checked="{{ checked }}" disabled="{{ disabled }}" trueValue="{{ trueValue }}" falseValue="{{ falseValue }}" indeterminate="{{ indeterminate }}" on-change="change"/><slot></slot>
+  </div>
+</template>
+
+<script>
+  import san from 'san'
+
+  export default {
+    initData() {
+      return {
+        // checked: false,
+        disabled: false,
+        trueValue: undefined,
+        falseValue: undefined
+        // indeterminate: false
+      }
+    },
+    computed: {
+      checked: function () {
+        const trueValue = this.data.get('trueValue')
+        const falseValue = this.data.get('falseValue')
+        const checked = this.data.get('checked')
+
+        return trueValue && falseValue ? Sring(checked) : Boolean(checked)
+      }
+    },
+    change() {
+      console.log('test')
+      const checked = this.data.get('checked')
+      this.data.set('checked', !checked)
+      console.log(this.data.get('checked'))
+      this.fire('change')
+    }
+  }
+</script>
+
+<style>
+</style>

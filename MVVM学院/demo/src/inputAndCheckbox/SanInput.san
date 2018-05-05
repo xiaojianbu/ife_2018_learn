@@ -1,0 +1,49 @@
+<template>
+  <input type="text" value="{= value =}" placeholder="{{ placeholder }}" disabled="{{ disabled }}" readonly="{{readonly}}" on-input="input" on-focus="focus" on-blur="blur"/>
+</template>
+
+<script>
+  import san from 'san'
+
+  export default {
+    initData() {
+      return {
+        value: '',
+        placeholder: '',
+        disabled: false,
+        readonly: false
+      }
+    },
+    input() {
+      console.log('test')
+      this.fire('input',  this.data.get('value'))
+    },
+    focus() {
+      this.fire('focus')
+      console.log('test1')
+    },
+    blur() {
+      this.fire('blur')
+      console.log('test2')
+    }
+  }
+</script>
+
+<style>
+  input {
+    font-size: 12px;
+    padding-left: 8px;
+    width: 280px;
+    height: 25px;
+    border: 1px solid #eee;
+  }
+
+  input:hover {
+    border: 1px solid #000;
+  }
+
+  .not-allowed {
+    cursor: not-allowed;
+  }
+</style>
+
