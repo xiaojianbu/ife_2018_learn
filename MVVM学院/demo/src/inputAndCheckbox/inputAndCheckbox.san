@@ -7,10 +7,23 @@
     <div class="{{showTooltip ? 'showTooltip' : ''}}">
       <san-input value="{{value}}" placeholder="请输入用户名" on-input="handleInput" on-focus="handleFocus"/>
     </div> 
-    <button tooltip="tooltip content here"> click here !! </button>
-    <san-checkbox checked="{=checked=}" indeterminate="{{indeterminate}}">
-      是否开启
-    </san-checkbox>
+    <div class="checkbox-container">
+      <san-checkbox checked="{=checked=}" on-change="handleChange">
+      常态
+      </san-checkbox>
+      <san-checkbox checked="{=checked1=}" disabled="{{disabled}}">
+      失效
+      </san-checkbox>
+      <san-checkbox checked="{=checked2=}" indeterminate="{{indeterminate}}">
+      部分选中
+      </san-checkbox>
+      <san-checkbox checked="{=checked3=}" disabled="{{disabled}}">
+      必选
+      </san-checkbox>
+      <san-checkbox checked="{=checked4=}" indeterminate="{{indeterminate}}" disabled="{{disabled}}">
+      部分必选
+      </san-checkbox>
+    </div>
   </div>
 </template>
 
@@ -24,6 +37,10 @@
       return {
         value: undefined,
         checked: false,
+        checked1: false,
+        checked2: false,
+        checked3: true,
+        checked4: false,
         indeterminate: true,
         disabled: true,
         showError: false,
@@ -49,55 +66,61 @@
     },
     handleFocus() {
       this.data.set('showTooltip', true)
+    },
+    handleChange(value) {
+      console.log('1', value)
     }
   }
 </script>
 
 <style>
-.errorText {
-  visibility: visible;
-  font-size: 12px;
-  color: red;
-}
-.notShow {
-  visibility: hidden;
-}
-.error {
-  border: 1px solid red;
-}
+  .checkbox-container {
+    margin-top: 40px;
+  }
+  .errorText {
+    visibility: visible;
+    font-size: 12px;
+    color: red;
+  }
+  .notShow {
+    visibility: hidden;
+  }
+  .error {
+    border: 1px solid red;
+  }
 
-.showTooltip{
-  position:relative;
-}
-.showTooltip::before {
-    content: "";
+  .showTooltip {
+    position: relative;
+  }
+  .showTooltip::before {
+    content: '';
     position: absolute;
-    top:-6px;
-    left:45px;
+    top: -6px;
+    left: 45px;
     transform: translateX(-50%);
     border-width: 4px 6px 0 6px;
     border-style: solid;
-    border-color: red transparent transparent     transparent;
+    border-color: red transparent transparent transparent;
     z-index: 99;
-    opacity:1;
-}
-.showTooltip::after {
+    opacity: 1;
+  }
+  .showTooltip::after {
     content: '提示文字文字';
     position: absolute;
-    left:45px;
-    top:-6px;
-    transform: translateX(-50%)   translateY(-100%);
-    background: rgba(255,0,0,0.7);
+    left: 45px;
+    top: -6px;
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(255, 0, 0, 0.7);
     text-align: center;
     color: #fff;
-    padding:4px 2px;
+    padding: 4px 2px;
     font-size: 12px;
     min-width: 80px;
     border-radius: 5px;
     pointer-events: none;
     padding: 4px 4px;
-    z-index:99;
-    opacity:1;
-}
+    z-index: 99;
+    opacity: 1;
+  }
 </style>
 
