@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>resume</title>
+  <link rel="stylesheet" href="./day-16.css">
+</head>
+
+<body>
+  <main>
+    <h1>简历</h1>
+    <div>
+      <section>
+        <h2>基本信息</h2>
+        <div class="info description">
+          <p>
+            <span>姓名</span>张三</p>
+          <p>
+            <span>性别</span>男</p>
+          <p>
+            <span>应聘职位</span>Web前端工程师</p>
+        </div>
+      </section>
+      <section>
+        <h2 class="clear-fix">联系方式</h2>
+        <div class="contact-info description">
+          <p>
+            <span>手机</span>12312311234</p>
+          <p>
+            <span>Email</span>
+            <a href="mailto:test@ife.com" target="_blank">test@ife.com</a>
+          </p>
+          <p>
+            <span>个人主页</span>
+            <a href="https://github.com/">Github</a>
+          </p>
+        </div>
+      </section>
+      <section>
+        <h2 class="clear-fix">能力描述</h2>
+        <div class="description">
+          <h3>技能能力</h3>
+          <p>熟练掌握HTML,CSS,JavaScript</p>
+          <h3>综合能力</h3>
+          <p>良好的沟通，主动积极，努力勤奋</p>
+        </div>
+      </section>
+      <section>
+        <h2>教育经历</h2>
+        <div class="description">
+          <h3>本科</h3>
+          <p>百度前端技能学院小薇学院</p>
+          <h3>研究生</h3>
+          <p>百度前端技能学院大斌学院</p>
+        </div>
+      </section>
+      <section>
+        <h2>项目经历</h2>
+        <div class="description">
+          <h3>小杜小杜</h3>
+          <p>作为前端工程师角色参与了ABC组件的开发</p>
+          <h3>SAN doc</h3>
+          <p>作为文档工程师参与了SAN Doc编写</p>
+        </div>
+      </section>
+    </div>
+    <div class="day-16">
+      <a href="./js_16_1.html">js_16_1</a>
+      <a href="./js_16_2.html">js_16_2</a>
+      <a href="./js_16_3.html">js_16_3</a>
+      <button id="ife">ife</button>
+      <button id="desc">desc</button>
+      <p id="ife-info"></p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('ife').onclick = function () {
+      document.getElementById('ife-info').innerHTML = 'Hello IFE'
+    }
+    document.getElementById('desc').onclick = function () {
+      document.getElementById('ife-info').innerHTML = '面向大学生的前端技术学习平台,由百度创办的免费前端技术学习实践、 交流、 分享平台。'
+    }
+
+  </script>
+</body>
+
+</html>
