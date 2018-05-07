@@ -24,6 +24,7 @@ p {
 aside {
   width: 100px;
   background-color: #1d2531;
+  z-index: 1;
 }
 
 .aside-icon {
@@ -172,9 +173,10 @@ nav p {
 .nav-footer {
   position: fixed;
   bottom: 20px;
-  left: 130px;
+  left: 129px;
   color: #fff;
   font-size: 14px;
+  background-color: #222c3c;
 }
 
 .nav-footer .goals,
@@ -203,6 +205,8 @@ nav p {
 
 .main-info {
   flex: 1;
+  z-index: 1;
+  background-color: #fff;
 }
 
 .user {
@@ -210,6 +214,7 @@ nav p {
   top: 11px;
   right: 25px;
   display: flex;
+  background-color: #fff;
 }
 
 .user-img {
