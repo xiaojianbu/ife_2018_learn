@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>resume</title>
+  <link rel="stylesheet" href="./day-17.css">
+</head>
+
+<body>
+  <main>
+    <h1>简历</h1>
+    <div>
+      <section>
+        <h2>基本信息</h2>
+        <div class="info description">
+          <p>
+            <span>姓名</span>张三</p>
+          <p>
+            <span>性别</span>男</p>
+          <p>
+            <span>应聘职位</span>Web前端工程师</p>
+        </div>
+      </section>
+      <section>
+        <h2 class="clear-fix">联系方式</h2>
+        <div class="contact-info description">
+          <p>
+            <span>手机</span>12312311234</p>
+          <p>
+            <span>Email</span>
+            <a href="mailto:test@ife.com" target="_blank">test@ife.com</a>
+          </p>
+          <p>
+            <span>个人主页</span>
+            <a href="https://github.com/">Github</a>
+          </p>
+        </div>
+      </section>
+      <section>
+        <h2 class="clear-fix">能力描述</h2>
+        <div class="description">
+          <h3>技能能力</h3>
+          <p>熟练掌握HTML,CSS,JavaScript</p>
+          <h3>综合能力</h3>
+          <p>良好的沟通，主动积极，努力勤奋</p>
+        </div>
+      </section>
+      <section>
+        <h2>教育经历</h2>
+        <div class="description">
+          <h3>本科</h3>
+          <p>百度前端技能学院小薇学院</p>
+          <h3>研究生</h3>
+          <p>百度前端技能学院大斌学院</p>
+        </div>
+      </section>
+      <section>
+        <h2>项目经历</h2>
+        <div class="description">
+          <h3>小杜小杜</h3>
+          <p>作为前端工程师角色参与了ABC组件的开发</p>
+          <h3>SAN doc</h3>
+          <p>作为文档工程师参与了SAN Doc编写</p>
+        </div>
+      </section>
+    </div>
+    <div class="day-17">
+      <a href="./day-17-1.html">js_17_1</a>
+      <a href="./day-17-2.html">js_17_2</a>
+      <a href="./day-17-3.html">js_17_3</a>
+      <a href="./day-17-4.html">js_17_4</a>
+      <a href="./day-17-5.html">js_17_5</a>
+    </div>
+  </main>
+
+  <script>
+    function eventHandler() {
+      var date = new Date()
+      var hour = date.getHours()
+      if (hour > 6 && hour < 9) {
+        alert('早上好')
+      } else if (hour > 9 && hour < 12) {
+        alert('上午好')
+      } else if (hour > 12 && hour < 18) {
+        alert('下午好')
+      } else if (hour > 18 || hour < 6) {
+        alert('晚上好')
+      }
+    }
+    if (document.readyState !== 'loading') {
+      eventHandler();
+    } else {
+      document.addEventListener('DOMContentLoaded', eventHandler);
+    }
+
+  </script>
+</body>
+
+</html>

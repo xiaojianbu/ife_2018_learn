@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-17-3</title>
+</head>
+
+<body>
+  <input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+  <input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+  <button id="trans-btn">转化为二进制</button>
+  <p id="result">运算结果</p>
+  <script>
+    function dec2bin(decNumber) {
+      var reg = new RegExp('^[1-9]\d*|0$')
+      var arr = []
+      if (!reg.test(decNumber)) {
+        return '请输入一个十进制非负整数'
+      } else {
+        while (decNumber) {
+          arr.push(decNumber % 2)
+          decNumber = parseInt(decNumber / 2, 10)
+        }
+        return arr.reverse().join('')
+      }
+    }
+
+    document.getElementById('trans-btn').onclick = function () {
+      var number = document.getElementById('dec-number').value
+      var bit = document.getElementById('bin-bit').value
+      var binNumber = dec2bin(number)
+      if (binNumber.length > bit) {
+        document.getElementById('result').innerHTML = binNumber
+        console.log('bin-bit数字小')
+      } else {
+        for (let i = 0,len = binNumber.length; i < bit - len; i++) {
+          binNumber = '0' + binNumber
+        }
+        document.getElementById('result').innerHTML = binNumber
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

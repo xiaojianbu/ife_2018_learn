@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-17-5</title>
+</head>
+
+<body>
+  <table id="table" border="1" cellspacing="0">
+  </table>
+  <script>
+    for (let i = 1; i <= 9; i++) {
+      for (let j = 1; j <= i; j++) {
+        console.log(j + '*' + i + '=' + j * i)
+      }
+      console.log('\n')
+    }
+    var table = document.getElementById('table')
+    var tr = ''
+    for (let i = 1; i <= 9; i++) {
+      var td = ''
+      for (let j = 1; j <= i; j++) {
+        td += '<td>' + j + '*' + i + '=' + j * i + '</td>'
+        console.log(j + '*' + i + '=' + j * i)
+      }
+      tr += '<tr>' + td + '</tr>'
+      console.log('\n')
+    }
+    table.innerHTML = tr
+
+  </script>
+</body>
+
+</html>
