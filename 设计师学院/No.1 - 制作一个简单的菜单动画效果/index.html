@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>No.1 - 制作一个简单的菜单动画效果</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 300px;
+    }
+
+    .demo {
+      width: 150px;
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      transition: color 1s ease-in;
+    }
+
+    .liner {
+      width: 150px;
+      border-bottom: 5px #00f solid;
+      transform: rotateY(90deg);
+      transition: transform 1s ease-in;
+      margin-bottom: 50px;
+    }
+
+    button {
+      outline:none;
+      font-weight: bold;
+      width: 150px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      border: 2px solid #eee;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="demo">
+      前端学院
+    </div>
+    <div class="liner"></div>
+    <button>切换样式</button>
+  </div>
+
+  <script>
+    document.querySelector('button').addEventListener('click', function () {
+      document.querySelector('.demo').style.color = '#00f'
+      document.querySelector('.liner').style.transform = 'rotateY(0deg)'
+    })
+    document.querySelector('.demo').addEventListener('transitionend', function () {
+      document.querySelector('.demo').style.color = '#000'
+      document.querySelector('.liner').style.transform = 'rotateY(90deg)'
+    }, true)
+
+  </script>
+</body>
+
+</html>
