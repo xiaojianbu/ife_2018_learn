@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-22-4</title>
+</head>
+
+<body>
+  <script>
+    var tree = {
+      "id": 0,
+      "name": "root",
+      "left": {
+        "id": 1,
+        "name": "Simon",
+        "left": {
+          "id": 3,
+          "name": "Carl",
+          "left": {
+            "id": 7,
+            "name": "Lee",
+            "left": {
+              "id": 11,
+              "name": "Fate"
+            }
+          },
+          "right": {
+            "id": 8,
+            "name": "Annie",
+            "left": {
+              "id": 12,
+              "name": "Saber"
+            }
+          }
+        },
+        "right": {
+          "id": 4,
+          "name": "Tony",
+          "left": {
+            "id": 9,
+            "name": "Candy"
+          }
+        }
+      },
+      "right": {
+        "id": 2,
+        "name": "right",
+        "left": {
+          "id": 5,
+          "name": "Carl",
+        },
+        "right": {
+          "id": 6,
+          "name": "Carl",
+          "right": {
+            "id": 10,
+            "name": "Kai"
+          }
+        }
+      }
+    }
+
+    // 假设id和name均不会重复，根据输入name找到对应的id
+    // DFS
+    // function findIdByName(name) {
+    //   let arr = []
+
+    //   function tree2Array(node) {
+    //     arr.push(node)
+    //     if (node.left) {
+    //       tree2Array(node.left)
+    //     }
+    //     if (node.right) {
+    //       tree2Array(node.right)
+    //     }
+    //   }
+    //   tree2Array(tree)
+
+    //   function search(name) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //       if (arr[i].name === name) {
+    //         return arr[i].id
+    //       }
+    //     }
+    //   }
+    //   return search(name)
+    // }
+
+    // // 假设id和name均不会重复，根据输入id找到对应的name
+    // // BFS
+    // function findNameById(id) {
+    //   let arr = []
+
+    //   function tree2Array(node) {
+    //     let queue = []
+    //     queue.push(node)
+    //     arr.push(node)
+    //     let currentNode = queue.shift()
+    //     while (currentNode) {
+    //       if (currentNode.left) {
+    //         queue.push(currentNode.left)
+    //         arr.push(currentNode.left)
+    //       }
+    //       if (currentNode.right) {
+    //         queue.push(currentNode.right)
+    //         arr.push(currentNode.right)
+    //       }
+    //       currentNode = queue.shift()
+    //     }
+    //   }
+    //   tree2Array(tree)
+
+    //   function serach(id) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //       if (arr[i].id === id) {
+    //         return arr[i].name
+    //       }
+    //     }
+    //   }
+    //   return serach(id)
+    // }
+
+    // 假设id和name均不会重复，根据输入name找到对应的id
+    function findIdByName(name) {
+      function find(node) {
+        if (node.name === name) {
+          return node.id
+        }
+        if (node.left) {
+          let id = find(node.left)
+          if (id) {
+            return id
+          }
+        }
+        if (node.right) {
+          let id = find(node.right)
+          if (id) {
+            return id
+          }
+        }
+      }
+      return find(tree)
+    }
+
+    // 假设id和name均不会重复，根据输入id找到对应的name
+    function findNameById(id) {
+      function find(node) {
+        let queue = []
+        queue.push(node)
+
+        let currentNode = queue.shift()
+        while (currentNode) {
+          if (currentNode.id === id) {
+            return currentNode.name
+            break
+          }
+          if (currentNode.left) {
+            queue.push(currentNode.left)
+          }
+          if (currentNode.right) {
+            queue.push(currentNode.right)
+          }
+          currentNode = queue.shift()
+        }
+      }
+
+      return find(tree)
+    }
+
+    // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+    function getListWithDLR() {
+      let nameStr = ''
+
+      function traverse(node) {
+        nameStr += `${node.name} `
+        if (node.left) {
+          traverse(node.left)
+        }
+        if (node.right) {
+          traverse(node.right)
+        }
+      }
+      traverse(tree)
+
+      console.log(nameStr)
+    }
+
+    // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+    function getListWithLDR() {
+      let nameStr = ''
+
+      function traverse(node) {
+        if (node.left) {
+          traverse(node.left)
+        }
+        nameStr += `${node.name} `
+        if (node.right) {
+          traverse(node.right)
+        }
+      }
+      traverse(tree)
+
+      console.log(nameStr)
+    }
+
+    // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+    function getListWithLRD() {
+      let nameStr = ''
+
+      function traverse(node) {
+        if (node.left) {
+          traverse(node.left)
+        }
+        if (node.right) {
+          traverse(node.right)
+        }
+        nameStr += `${node.name} `
+      }
+      traverse(tree)
+
+      console.log(nameStr)
+    }
+
+  </script>
+</body>
+
+</html>

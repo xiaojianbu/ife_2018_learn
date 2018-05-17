@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-22-2</title>
+</head>
+
+<body>
+  <div>
+    <label>String A:
+      <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+    </label>
+    <textarea id="str-a"></textarea>
+    <label>String B:
+      <input id="radio-b" type="radio" name="str-obj" value="b">
+    </label>
+    <textarea id="str-b"></textarea>
+    <label>Num A：
+      <input id="num-a" type="number" value="0">
+    </label>
+    <label>Num B：
+      <input id="num-b" type="number" value="1">
+    </label>
+  </div>
+  <div>
+    <button>获取当前选中输入的内容长度</button>
+    <button>当前选中输入中的第3个字符</button>
+    <button>把两个输入框的文字连接在一起输出（concat）</button>
+    <button>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+    <button>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+    <button>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+    <button>当前选中输入框的行数</button>
+    <button>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+    <button>把所选输入框中的内容全部转为大写</button>
+    <button>把所选输入框中的内容全部转为小写</button>
+    <button>把所选输入框中内容的半角空格全部去除</button>
+    <button>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+  </div>
+  <p id="result"></p>
+
+  <script>
+    const radios = document.querySelectorAll('[type=radio]')
+    const btns = document.querySelectorAll('button')
+    const result = document.querySelector('#result')
+    const strA = document.querySelector('#str-a')
+    const strB = document.querySelector('#str-b')
+    const numA = document.querySelector('#num-a')
+    const numB = document.querySelector('#num-b')
+
+    // 获取radio的值
+    function getRadioValue() {
+      let value = null
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          value = radios[i].value
+        }
+      }
+      return value
+    }
+    // 获取当前选中输入的内容长度
+    btns[0].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+
+      result.innerText = document.querySelector('#str-' + radioValue).value.length
+    })
+    // 当前选中输入中的第3个字符
+    btns[1].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+
+      result.innerText = document.querySelector('#str-' + radioValue).value.charAt(2)
+    })
+    // 把两个输入框的文字连接在一起输出（concat）
+    btns[2].addEventListener('click', function () {
+      result.innerText = strA.value.concat(strB.value)
+    })
+    // 输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）
+    btns[3].addEventListener('click', function () {
+      result.innerText = `${strB.value}  第一次出现的位置${strA.value.indexOf(strB.value)}`
+    })
+    // 输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）
+    btns[4].addEventListener('click', function () {
+      result.innerText = `${strA.value}  第一次出现的位置${strB.value.lastIndexOf(strA.value)}`
+    })
+    // 使用slice获取选中输入框内容的部分内容，参数为num-a及 num-b
+    btns[5].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+
+      result.innerText = document.querySelector('#str-' + radioValue).value.slice(numA.value, numB.value)
+    })
+    // 当前选中输入框的行数
+    btns[6].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+      let str = document.querySelector('#str-' + radioValue).value
+
+      result.innerText = str.match(/\n|\r/g) + 1
+    })
+    // 使用substr获取选中输入框内容的子字符串，参数为num-a及num-b
+    btns[7].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+
+      result.innerText = document.querySelector('#str-' + radioValue).value.substr(numA.value, numB.value)
+    })
+    // 把所选输入框中的内容全部转为大写
+    btns[8].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+      document.querySelector('#str-' + radioValue).value = document.querySelector('#str-' + radioValue).value.toUpperCase()
+      result.innerText = document.querySelector('#str-' + radioValue).value
+    })
+    // 把所选输入框中的内容全部转为小写
+    btns[9].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+      document.querySelector('#str-' + radioValue).value = document.querySelector('#str-' + radioValue).value.toLowerCase()
+      result.innerText = document.querySelector('#str-' + radioValue).value
+    })
+    // 把所选输入框中内容的半角空格全部去除
+    btns[10].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+      document.querySelector('#str-' + radioValue).value = document.querySelector('#str-' + radioValue).value.replace(
+        /\s/g, '')
+      result.innerText = document.querySelector('#str-' + radioValue).value
+    })
+    // 把所选输入框中内容的a全部替换成另外一个输入框中的内容
+    btns[11].addEventListener('click', function () {
+      let radioValue = getRadioValue()
+      let str
+      if (radioValue === 'a') {
+        str = document.querySelector('#str-b').value
+      } else {
+        str = document.querySelector('#str-a').value
+      }
+
+      document.querySelector('#str-' + radioValue).value = str
+      result.innerText = str
+    })
+
+  </script>
+</body>
+
+</html>
