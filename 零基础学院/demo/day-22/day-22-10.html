@@ -9,6 +9,17 @@
 </head>
 
 <body>
+  <a href="./day-22-1.html">day-22-任务1</a>
+  <a href="./day-22-2.html">day-22-任务2</a>
+  <a href="./day-22-3.html">day-22-任务3</a>
+  <a href="./day-22-4.html">day-22-任务4</a>
+  <a href="./day-22-5.html">day-22-任务5</a>
+  <a href="./day-22-6.html">day-22-任务6</a>
+  <a href="./day-22-7.html">day-22-任务7</a>
+  <a href="./day-22-8.html">day-22-任务8</a>
+  <a href="./day-22-9.html">day-22-任务9</a>
+
+
   <script>
     var scoreObject = {
       "Tony": {
@@ -89,6 +100,29 @@
       return object
     }
     console.log(array2Object(menuArr))
+    // 来源：https://github.com/yeung66/ife-basic/blob/master/basic22-24/ex4.html
+    // 我想岔了？还要再看看
+    function arr2obj(arr) {
+      var obj = {
+        0: {}
+      }
+      for (var i = 0; i < arr.length; i++) {
+        obj[arr[i][0]] = {
+          'name': arr[i][1]
+        };
+        if (arr[i][2] == -1) {
+          obj[0][arr[i][0]] = obj[arr[i][0]];
+        } else {
+          if (obj[arr[i][2]]['subMenu']) {
+            obj[arr[i][2]]['subMenu'][arr[i][0]] = obj[arr[i][0]];
+          } else {
+            obj[arr[i][2]]['subMenu'] = {};
+            obj[arr[i][2]]['subMenu'][arr[i][0]] = obj[arr[i][0]];
+          }
+        }
+      }
+      return obj['0'];
+    }
 
   </script>
 </body>
