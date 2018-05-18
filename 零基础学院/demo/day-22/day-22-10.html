@@ -100,6 +100,56 @@
       return object
     }
     console.log(array2Object(menuArr))
+    // 学习https://github.com/yeung66/ife-basic/blob/master/basic22-24/ex4.html之后对代码进行一定的优化
+    function array2Object1(array) {
+      let object = {}
+      let arr = []
+      let temp = {}
+      // 先将二维数组转换为一维对象数组
+      for (let i = 0; i < array.length; i++) {
+        arr.push({
+          index: array[i][0],
+          name: array[i][1],
+          parentId: array[i][2] !== -1 ? array[i][2] : 0
+        })
+      }
+      // 先转换获取temp临时对象，数据格式为
+      // {
+      //     "1":{"name":"Area1"},
+      //     "2":{"name":"Area2"},
+      //     "3":{"name":"Area1-1"},
+      //     "4":{"name":"Area1-2"},
+      //     "5":{"name":"Area2-1"},
+      //     "6":{"name":"Area2-2"},
+      //     "7":{"name":"Area1-2-3"},
+      //     "8":{"name":"Area2-2-1"}
+      // }      
+      for (const i in arr) {
+        temp[arr[i].index] = {
+          'name': arr[i].name
+        }
+      }
+      // 主要还是利用对象引用同一节点
+      for (const i in arr) {
+        // 判断节点是否存在父节点
+        if (arr[i].parentId) {
+          // 存在父节点，则判断父节点是否含有subMenu属性
+          if (!temp[arr[i].parentId].subMenu) {
+            // 不存在的话，父节点添加subMenu属性
+            temp[arr[i].parentId].subMenu = {}
+          }
+          // 设置父节点的subMenu属性值
+          temp[arr[i].parentId].subMenu[arr[i].index] = temp[arr[i].index]
+        } else {
+          // 不存在父节点，以arr[i].index为键值，temp[arr[i].index]为值设置object的属性
+          object[arr[i].index] = temp[arr[i].index]
+        }
+      }
+      // 主要还是利用对象引用同一节点,temp节点更新，object的数据也同时更新
+      console.log(temp)
+      return object
+    }
+    console.log(array2Object1(menuArr))
     // 来源：https://github.com/yeung66/ife-basic/blob/master/basic22-24/ex4.html
     // 我想岔了？还要再看看
     function arr2obj(arr) {
