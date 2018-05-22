@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-28</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 20%;
+      height: 30%;
+      margin: auto;
+    }
+
+    input {
+      width: 200px;
+      height: 30px;
+    }
+
+    ul {
+      position: absolute;
+      top: 36px;
+      left: 0;
+      display: none;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      border-left: 1px solid #eee;
+      overflow: hidden;
+    }
+
+    li {
+      font-size: 14px;
+      padding: 0 20px;
+      position: relative;
+      white-space: nowrap;
+      color: #606266;
+      height: 34px;
+      line-height: 34px;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background-color: #f5f5f5;
+    }
+
+    .selected {
+      background-color: #f5f;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <input id="email-input" type="text" autofocus="autofocus">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+
+    <script>
+      let emailInput = document.querySelector('#email-input')
+      let emailSugWrapper = document.querySelector('#email-sug-wrapper')
+
+      function getEmailInput() {
+        return emailInput.value.trim()
+      }
+
+      // 用正则表达式实现html转码
+      function htmlEncodeByRegExp(str) {
+        let s = ''
+
+        if (str.length === 0) {
+          return ''
+        } else {
+          s = str.replace(/&/g, '&amp;')
+          s = s.replace(/</g, '&lt;')
+          s = s.replace(/>/g, '&gt;')
+          s = s.replace(/ /g, '&nbsp;')
+          s = s.replace(/\'/g, '&#39;')
+          s = s.replace(/\"/g, '&quot;')
+          return s;
+        }
+      }
+      // 用正则表达式实现html解码
+      function htmlDecodeByRegExp(str) {
+        let s = ''
+        if (str.length == 0) return ''
+        s = str.replace(/&amp;/g, '&')
+        s = s.replace(/&lt;/g, '<')
+        s = s.replace(/&gt;/g, '>')
+        s = s.replace(/&nbsp;/g, ' ')
+        s = s.replace(/&#39;/g, '\'')
+        s = s.replace(/&quot;/g, '\"')
+        return s;
+      }
+
+      function generateLis() {
+        let postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net']
+        let emailInputValue = getEmailInput()
+        let liStr = ''
+        let index = emailInputValue.indexOf('@')
+        let newPostfixList = []
+
+        if (index > 0) {
+          let arr = emailInputValue.split('@')
+          emailInputValue = arr[0]
+          newPostfixList = postfixList.filter((item) => {
+            return item.slice(0, arr[1].length) === arr[1]
+          })
+        }
+        postfixList = newPostfixList.length !== 0 ? newPostfixList : postfixList
+        postfixList.forEach((item) => {
+          let value = htmlEncodeByRegExp(emailInputValue)
+
+          liStr += `<li>${value}@${item}</li>`
+        })
+
+        return liStr
+      }
+
+      function showEmailSugWrapper() {
+        emailSugWrapper.style.display = 'inline-block'
+        emailSugWrapper.innerHTML = generateLis()
+        let firstOption = emailSugWrapper.querySelectorAll('li')[0]
+        firstOption.classList.add('selected')
+      }
+
+      function hideEmailSugWrapper() {
+        emailSugWrapper.innerHTML = ''
+        emailSugWrapper.style.display = 'none';
+      }
+
+      emailInput.addEventListener('input', function () {
+        let emailInputValue = getEmailInput()
+        if (emailInputValue) {
+          resetSelected()
+          showEmailSugWrapper()
+        } else {
+          hideEmailSugWrapper()
+        }
+      })
+      emailInput.addEventListener('keydown', function () {
+        if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown' && event.key !== 'Enter') {
+          resetSelected()
+        }
+        if (event.key === 'Escape') {
+          emailInput.select()
+        }
+      })
+
+      emailSugWrapper.addEventListener('click', function (event) {
+        emailInput.value = htmlDecodeByRegExp(event.target.innerHTML)
+        emailInput.focus()
+        hideEmailSugWrapper()
+      })
+
+      function resetSelected() {
+        let firstLi = document.querySelectorAll('li')[0]
+        let selectedLi = document.querySelectorAll('.selected')[0]
+
+        if (firstLi !== selectedLi) {
+          selectedLi.classList.remove('selected')
+          firstLi.classList.add('selected')
+        }
+      }
+
+      window.addEventListener('keydown', function (event) {
+        if (window.getComputedStyle(emailSugWrapper).display !== 'none') {
+          let lis = Array.from(emailSugWrapper.querySelectorAll('li'))
+          let selectedLi = document.querySelectorAll('.selected')[0]
+          let index = lis.indexOf(selectedLi)
+
+          if (event.key === 'ArrowUp') {
+            selectedLi.classList.remove('selected')
+            if (lis[0] !== selectedLi) {
+              lis[index - 1].classList.add('selected')
+            } else {
+              lis[lis.length - 1].classList.add('selected')
+            }
+          }
+          if (event.key === 'ArrowDown') {
+            selectedLi.classList.remove('selected')
+            if (lis[lis.length - 1] !== selectedLi) {
+              lis[index + 1].classList.add('selected')
+            } else {
+              lis[0].classList.add('selected')
+            }
+          }
+          if (event.key === 'Enter') {
+            emailInput.value = htmlDecodeByRegExp(selectedLi.innerHTML)
+            hideEmailSugWrapper()
+          }
+        }
+
+      })
+
+    </script>
+  </div>
+</body>
+
+</html>
