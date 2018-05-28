@@ -62,6 +62,7 @@ function getDataBySelect() {
     } else if (!regionSelected && productSelected) {
       return item.product === productSelected
     }
+    return false
   })
 }
 
