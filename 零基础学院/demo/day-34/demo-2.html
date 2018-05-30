@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <canvas id="tutorial" width="650" height="650"></canvas>
+
+  <script>
+    let canvas = document.querySelector('#tutorial')
+    let ctx = canvas.getContext('2d')
+
+    ctx.beginPath()
+    ctx.moveTo(10, 10)
+    ctx.lineTo(100, 10)
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.moveTo(120, 120)
+    ctx.rect(120, 120, 50, 50)
+    ctx.fill()
+
+    ctx.beginPath()
+    ctx.moveTo(220, 220)
+    ctx.arc(200, 200, 20, 0, Math.PI * 2)
+    ctx.fill()
+
+    ctx.beginPath()
+    ctx.moveTo(280, 280)
+    ctx.font = "48px serif";
+    ctx.fillText("Hello world", 10, 50);
+    ctx.fill()
+
+    ctx.beginPath()
+    ctx.arc(400, 400, 50, 0, Math.PI * 2, true)
+    ctx.moveTo(400, 400)
+    ctx.lineTo(430, 400)
+    ctx.moveTo(400, 400)
+    ctx.lineTo(400, 360)
+    ctx.stroke()
+
+    ctx.beginPath()
+
+    moveTo(200, 400)
+    ctx.bezierCurveTo(530, 140, 470, 100, 440, 150)
+    ctx.bezierCurveTo(420, 15, 350, 120, 350, 150)
+    ctx.bezierCurveTo(300, 55, 250, 100, 270, 180)
+    ctx.fill()
+
+  </script>
+</body>
+
+</html>

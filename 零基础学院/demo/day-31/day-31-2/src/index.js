@@ -6,9 +6,6 @@ import {
   generateCheckbox
 } from './js/checkbox.js'
 
-// let regionRadioWrapper = document.querySelector('#region-radio-wrapper')
-// let productRadioWrapper = document.querySelector('#product-radio-wrapper')
-
 let checkboxData = getCheckboxData()
 
 /**
