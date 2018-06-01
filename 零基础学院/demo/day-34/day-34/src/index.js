@@ -62,13 +62,14 @@ let bar = new Bar({
   container: document.querySelector('#bar-wrapper'),
   data: eastChinaPhone,
   barColor: '#D53A35',
+  label: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 })
 
 let line = new Line({
   container: document.querySelector('#line-wrapper'),
   data: eastChinaPhone,
   lineColor: '#cd5e5b',
-  label: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', 's十一月', '十二月']
+  label: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 })
 
 line.renderSingle()

@@ -1,6 +1,7 @@
 export class Bar {
   constructor(config) {
     this.data = config.data || [] // 将要绘制柱状图的数据
+    this.label = config.label || []
     this.container = config.container || document.querySelector('body') // 柱状图的包含容器
     this.xCoordinate = config.xCoordinate || 0 // 柱状图绘制区域起点X坐标
     this.yCoordinate = config.yCoordinate || 0 // 柱状图绘制区域起点Y坐标
@@ -46,8 +47,42 @@ export class Bar {
     bar.appendChild(this.drawLine(xAxis))
     bar.appendChild(this.drawLine(yAxis))
 
-    let maxHeight = Math.max(...this.data)
+    // 计算y轴坐标，换算成整十整百 参考：https://github.com/Gesangs/IFE/blob/master/js/34-36/bar.js
+    function getInt(num) {
+      if (num > 10 && num < 100) {
+        return Math.ceil(num / 10) * 10
+      } else if (num > 100) {
+        return Math.ceil(num / 100) * 100
+      }
+    }
+
+    let maxHeight = getInt(Math.max(...this.data))
     let rate = maxHeight / this.yAxisHeight
+
+    let interval = maxHeight / 5
+    for (let i = 1; i <= 5; i++) {
+      let data = {
+        x1: this.xCoordinate + 20,
+        y1: this.yCoordinate + this.yAxisHeight + 20 - i * interval / rate,
+        x: this.xAxisWidth + this.xCoordinate + 20,
+        y: this.yCoordinate + this.yAxisHeight + 20 - i * interval / rate,
+        color: '#ddd'
+      }
+      bar.appendChild(this.drawLine(data))
+
+      data = {
+        x: this.xCoordinate,
+        y: this.yCoordinate + this.yAxisHeight + 20 - i * interval / rate,
+        value: i * interval
+      }
+      bar.appendChild(this.drawXLabel(data))
+    }
+
+    bar.appendChild(this.drawXLabel({
+      x: this.xCoordinate,
+      y: this.yCoordinate + this.yAxisHeight + 20,
+      value: 0
+    }))
 
     for (let i = 0; i < this.data.length; i++) {
 
@@ -61,8 +96,15 @@ export class Bar {
         x4: this.xCoordinate + 20 + this.barInterval * (i + 1) + this.barWidth * (i + 1),
         y4: this.yCoordinate + this.yAxisHeight + 20,
       }
-
       bar.appendChild(this.drawBar(data))
+
+      data = {
+        x: this.xCoordinate + 20 + this.barInterval * (i + 1) + this.barWidth * i,
+        y: this.yCoordinate + this.yAxisHeight + 30,
+        value: this.label[i]
+      }
+
+      bar.appendChild(this.drawXLabel(data))
     }
 
     this.container.appendChild(bar)
@@ -76,7 +118,7 @@ export class Bar {
 
     path.setAttribute('d', d)
     path.setAttribute('fill', 'transparent')
-    path.setAttribute('stroke', this.axisColor)
+    path.setAttribute('stroke', theArgs.color ? theArgs.color : this.axisColor)
 
     return path
   }
@@ -92,6 +134,17 @@ export class Bar {
     path.setAttribute('stroke', this.barColor)
 
     return path
+  }
+
+  drawXLabel(config) {
+    let svgns = 'http://www.w3.org/2000/svg'
+    let text = document.createElementNS(svgns, 'text')
+    text.innerHTML = config.value
+    text.setAttribute('x', config.x)
+    text.setAttribute('y', config.y)
+    text.style.fontSize = '10px'
+
+    return text
   }
 
   setData(data) {

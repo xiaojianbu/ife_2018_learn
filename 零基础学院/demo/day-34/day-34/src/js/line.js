@@ -18,28 +18,27 @@ export class Line {
     this.lineWidth = config.lineWidth || '2' // 线的宽度
 
     this.pointInterval = this.data.length && this.xAxisWidth / this.data.length * 0.8 || 20
+
+    this.init()
   }
 
-  renderSingle(data) {
-    if (data) {
-      this.data = data
-    }
+  init() {
     this.container.innerHTML = ''
-    let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
+    this.canvas = document.createElement('canvas')
+    this.ctx = this.canvas.getContext('2d')
 
-    canvas.setAttribute('width', this.areaWidth)
-    canvas.setAttribute('height', this.areaHeight)
+    this.canvas.setAttribute('width', this.areaWidth)
+    this.canvas.setAttribute('height', this.areaHeight)
 
     let xAxis = {
-      ctx: ctx,
+      ctx: this.ctx,
       x1: 20,
       y1: 20 + this.yAxisHeight,
       x: 20 + this.xAxisWidth,
       y: 20 + this.yAxisHeight
     }
     let yAxis = {
-      ctx: ctx,
+      ctx: this.ctx,
       x1: 20,
       y1: 20,
       x: 20,
@@ -50,15 +49,33 @@ export class Line {
     this.drawLine(xAxis)
     // 画纵轴
     this.drawLine(yAxis)
-
+    // 画横轴坐标值
     for (let i = 0; i < this.label.length; i++) {
-      ctx.fillText(this.label[i], 10 + this.pointInterval * (i + 1), this.yAxisHeight + 40, 20)
+      this.ctx.fillText(this.label[i], 10 + this.pointInterval * (i + 1), this.yAxisHeight + 40, 20)
+
+      this.drawLine({
+        ctx: this.ctx,
+        x1: 20 + this.pointInterval * (i + 1),
+        y1: this.yAxisHeight + 20,
+        x: 20 + this.pointInterval * (i + 1),
+        y: this.yAxisHeight + 20 + 5,
+        color: '#000'
+      })
     }
+  }
+
+  renderSingle(data) {
+    if (data) {
+      this.data = data
+    }
+    this.init()
 
     // 画点和连线
-
-    let maxHeight = Math.max(...this.data)
+    let maxHeight = this.getInt(Math.max(...this.data))
     let rate = maxHeight / this.yAxisHeight
+    let interval = maxHeight / 5
+
+    this.drawYLabel(interval, rate)
 
     let x1 = 0
     let y1 = 0
@@ -70,7 +87,8 @@ export class Line {
       this.drawPoint({
         x,
         y,
-        ctx
+        ctx: this.ctx,
+        color: this.lineColor
       })
 
       if (i !== 0) {
@@ -79,7 +97,7 @@ export class Line {
           y1,
           x,
           y,
-          ctx
+          ctx: this.ctx
         })
       }
 
@@ -87,64 +105,24 @@ export class Line {
       y1 = this.yAxisHeight + 20 - this.data[i] / rate
     }
 
-    this.container.appendChild(canvas)
-  }
-
-  drawLine(option) {
-    option.ctx.beginPath()
-    option.ctx.strokeStyle = option.color ? option.color : this.lineColor
-    option.ctx.moveTo(option.x1, option.y1)
-    option.ctx.lineTo(option.x, option.y)
-    option.ctx.stroke()
-  }
-
-  drawPoint(option) {
-    option.ctx.beginPath()
-    option.ctx.fillStyle = this.pointColor
-    option.ctx.arc(option.x, option.y, this.pointDiameter / 2, 0, Math.PI * 2, true)
-    option.ctx.fill()
+    this.container.appendChild(this.canvas)
   }
 
   renderManyLines(data) {
     this.data = data
-    this.container.innerHTML = ''
-    let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
-
-    canvas.setAttribute('width', this.areaWidth)
-    canvas.setAttribute('height', this.areaHeight)
-
-    let xAxis = {
-      ctx: ctx,
-      x1: 20,
-      y1: 20 + this.yAxisHeight,
-      x: 20 + this.xAxisWidth,
-      y: 20 + this.yAxisHeight
-    }
-    let yAxis = {
-      ctx: ctx,
-      x1: 20,
-      y1: 20,
-      x: 20,
-      y: 20 + this.yAxisHeight
-    }
-
-    // 画横轴
-    this.drawLine(xAxis)
-    // 画纵轴
-    this.drawLine(yAxis)
-
-    for (let i = 0; i < this.label.length; i++) {
-      ctx.fillText(this.label[i], 10 + this.pointInterval * (i + 1), this.yAxisHeight + 40, 20)
-    }
+    this.init()
 
     let maxHeight = 0
 
     this.data.forEach(item => {
       maxHeight = maxHeight < Math.max(...item.sale) ? Math.max(...item.sale) : maxHeight
     })
-
+    maxHeight = this.getInt(maxHeight)
     let rate = maxHeight / this.yAxisHeight
+    let interval = maxHeight / 5
+
+    this.drawYLabel(interval, rate)
+
     let x1 = 0
     let y1 = 0
 
@@ -157,7 +135,8 @@ export class Line {
         this.drawPoint({
           x,
           y,
-          ctx
+          ctx: this.ctx,
+          color: color
         })
 
         if (i !== 0) {
@@ -166,7 +145,7 @@ export class Line {
             y1,
             x,
             y,
-            ctx,
+            ctx: this.ctx,
             color
           })
         }
@@ -175,6 +154,46 @@ export class Line {
         y1 = this.yAxisHeight + 20 - item.sale[i] / rate
       }
     })
-    this.container.appendChild(canvas)
+    this.container.appendChild(this.canvas)
+  }
+
+  drawLine(option) {
+    option.ctx.beginPath()
+    option.ctx.strokeStyle = option.color ? option.color : this.lineColor
+    option.ctx.moveTo(option.x1, option.y1)
+    option.ctx.lineTo(option.x, option.y)
+    option.ctx.stroke()
+  }
+
+  drawPoint(option) {
+    option.ctx.beginPath()
+    option.ctx.fillStyle = option.color ? option.color : this.pointColor
+    option.ctx.arc(option.x, option.y, this.pointDiameter / 2, 0, Math.PI * 2, true)
+    option.ctx.fill()
+  }
+
+  drawYLabel(interval, rate) {
+    for (let i = 1; i <= 5; i++) {
+      let data = {
+        ctx: this.ctx,
+        x1: 20,
+        y1: this.yAxisHeight + 20 - i * interval / rate,
+        x: 20 + this.xAxisWidth,
+        y: this.yAxisHeight + 20 - i * interval / rate,
+        color: '#ddd'
+      }
+
+      this.drawLine(data)
+      this.ctx.fillText(i * interval, 0, this.yAxisHeight + 20 - i * interval / rate, 20)
+    }
+  }
+
+  // 计算y轴坐标，换算成整十整百 参考：https://github.com/Gesangs/IFE/blob/master/js/34-36/bar.js
+  getInt(num) {
+    if (num > 10 && num < 100) {
+      return Math.ceil(num / 10) * 10
+    } else if (num > 100) {
+      return Math.ceil(num / 100) * 100
+    }
   }
 }
