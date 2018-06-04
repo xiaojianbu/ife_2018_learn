@@ -1,7 +1,3 @@
-import {
-  renderTable
-} from './table.js'
-
 /**
  * 生成一组checkbox
  * @param {String } id checkbox容器的Id
@@ -45,7 +41,6 @@ function selectAll(id) {
     AllCheckbox.forEach(item => {
       item.checked = true
     })
-    renderTable()
   }
 }
 
@@ -66,6 +61,5 @@ function selectChildOption(id, target) {
     } else {
       document.querySelector(`#${id}-all`).checked = false
     }
-    renderTable()
   }
 }

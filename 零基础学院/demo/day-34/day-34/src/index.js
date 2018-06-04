@@ -5,6 +5,7 @@ import './css/index.css'
 import {
   generateCheckbox
 } from './js/checkbox.js'
+import { renderTable } from './js/table.js'
 import {
   Bar
 } from './js/bar.js'
@@ -56,7 +57,7 @@ generateCheckbox('region-radio-wrapper', checkboxData.region)
 generateCheckbox('product-radio-wrapper', checkboxData.product)
 
 // 华东地区手机12个月的数据
-let eastChinaPhone = sourceData[0].sale
+let eastChinaPhone = [].concat(sourceData[0])
 
 let bar = new Bar({
   container: document.querySelector('#bar-wrapper'),
@@ -72,8 +73,6 @@ let line = new Line({
   label: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 })
 
-line.renderSingle()
-
 let tableWrapper = document.querySelector('#table-wrapper')
 
 tableWrapper.addEventListener('mouseover', function (event) {
@@ -87,24 +86,26 @@ tableWrapper.addEventListener('mouseover', function (event) {
 
       return false
     })
-    line.renderSingle(data[0].sale)
-    bar.setData(data[0].sale)
+    line.setData([].concat(data[0]))
+    bar.setData([].concat(data[0]))
   }
 })
 
 tableWrapper.addEventListener('mouseout', function () {
   let data = getDataByChecked()
-
-  line.renderManyLines(data)
+  line.setData(data)
+  bar.setData(data)
 })
 
 // 响应复选框的改变，重绘图表
-document.addEventListener('click', (e) => {
+document.querySelector('#checkbox-wrapper').addEventListener('click', (e) => {
   let target = e.target || e.srcElement
 
   if (target.tagName === 'INPUT') {
     let data = getDataByChecked()
 
-    line.renderManyLines(data)
+    renderTable()
+    line.setData(data)
+    bar.setData(data)
   }
 })

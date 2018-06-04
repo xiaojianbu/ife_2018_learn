@@ -17,12 +17,16 @@ export class Line {
     this.lineColor = config.lineColor || 'black' // 线的颜色
     this.lineWidth = config.lineWidth || '2' // 线的宽度
 
-    this.pointInterval = this.data.length && this.xAxisWidth / this.data.length * 0.8 || 20
+    this.pointInterval = this.label.length && this.xAxisWidth / this.label.length * 0.8 || 20
 
     this.init()
   }
 
   init() {
+    this.render()
+  }
+
+  render() {
     this.container.innerHTML = ''
     this.canvas = document.createElement('canvas')
     this.ctx = this.canvas.getContext('2d')
@@ -62,55 +66,6 @@ export class Line {
         color: '#000'
       })
     }
-  }
-
-  renderSingle(data) {
-    if (data) {
-      this.data = data
-    }
-    this.init()
-
-    // 画点和连线
-    let maxHeight = this.getInt(Math.max(...this.data))
-    let rate = maxHeight / this.yAxisHeight
-    let interval = maxHeight / 5
-
-    this.drawYLabel(interval, rate)
-
-    let x1 = 0
-    let y1 = 0
-
-    for (let i = 0; i < this.data.length; i++) {
-      let x = 20 + this.pointInterval * (i + 1)
-      let y = this.yAxisHeight + 20 - this.data[i] / rate
-
-      this.drawPoint({
-        x,
-        y,
-        ctx: this.ctx,
-        color: this.lineColor
-      })
-
-      if (i !== 0) {
-        this.drawLine({
-          x1,
-          y1,
-          x,
-          y,
-          ctx: this.ctx
-        })
-      }
-
-      x1 = 20 + this.pointInterval * (i + 1)
-      y1 = this.yAxisHeight + 20 - this.data[i] / rate
-    }
-
-    this.container.appendChild(this.canvas)
-  }
-
-  renderManyLines(data) {
-    this.data = data
-    this.init()
 
     let maxHeight = 0
 
@@ -195,5 +150,10 @@ export class Line {
     } else if (num > 100) {
       return Math.ceil(num / 100) * 100
     }
+  }
+
+  setData(data) {
+    this.data = data
+    this.render()
   }
 }
