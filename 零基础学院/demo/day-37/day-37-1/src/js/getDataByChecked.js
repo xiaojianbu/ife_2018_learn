@@ -23,17 +23,29 @@ export function getDataByChecked() {
     productChecked.push(productElements[i].value)
   }
 
-  return sourceData.filter(item => {
-    if (regionChecked.length && productChecked.length) {
-      return (
-        regionChecked.includes(item.region) &&
-        productChecked.includes(item.product)
-      )
-    } else if (regionChecked.length && !productChecked.length) {
-      return regionChecked.includes(item.region)
-    } else if (!regionChecked.length && productChecked.length) {
-      return productChecked.includes(item.product)
+  let data = []
+
+  sourceData.forEach(item => {
+    // 从localStorage中获取数据
+    if (localStorage.getItem(`${item.product}-${item.region}`)) {
+      data.push(JSON.parse(localStorage.getItem(`${item.product}-${item.region}`)))
+    } else {
+      if (regionChecked.length && productChecked.length) {
+        if (regionChecked.includes(item.region) &&
+          productChecked.includes(item.product)) {
+          data.push(item)
+        }
+      } else if (regionChecked.length && !productChecked.length) {
+        if (regionChecked.includes(item.region)) {
+          data.push(item)
+        }
+      } else if (!regionChecked.length && productChecked.length) {
+        if (productChecked.includes(item.product)) {
+          data.push(item)
+        }
+      }
     }
-    return false
   })
+
+  return data
 }

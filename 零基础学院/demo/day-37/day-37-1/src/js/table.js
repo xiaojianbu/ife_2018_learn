@@ -25,9 +25,7 @@ function renderBody(data, rowspan, value, attr) {
     let shopHtml = ''
     shopHtml += `<td>${data[i][attr]}</td>`
     for (let j = 0; j < data[i].sale.length; j++) {
-      shopHtml += `<td data-chart-data="${value}-${data[i][attr]}">${
-        data[i].sale[j]
-      }</td>`
+      shopHtml += `<td data-chart-data="${value}-${data[i][attr]}"><input data-chart-data="${value}-${data[i][attr]}" type="text" value="${data[i].sale[j]}"></td>`
     }
     if (i === 0) {
       bodyHtml += `${shopHtml}</tr>`

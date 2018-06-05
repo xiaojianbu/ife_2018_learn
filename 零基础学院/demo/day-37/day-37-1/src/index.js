@@ -5,7 +5,9 @@ import './css/index.css'
 import {
   generateCheckbox
 } from './js/checkbox.js'
-import { renderTable } from './js/table.js'
+import {
+  renderTable
+} from './js/table.js'
 import {
   Bar
 } from './js/bar.js'
@@ -107,5 +109,43 @@ document.querySelector('#checkbox-wrapper').addEventListener('click', (e) => {
     renderTable()
     line.setData(data)
     bar.setData(data)
+    tableWrapper.querySelectorAll('input').forEach(element => {
+      element.addEventListener('blur', () => {
+        if (!isNumeric(event.target.value)) {
+          alert('请输入数字')
+        }
+      })
+    })
+  }
+})
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n)
+}
+
+document.querySelector('#save-data').addEventListener('click', () => {
+  if (tableWrapper.querySelector('table')) {
+    let first = tableWrapper.querySelectorAll('th')[0].innerHTML === '地区' ? 'region' : 'product'
+    let second = tableWrapper.querySelectorAll('th')[1].innerHTML === '地区' ? 'region' : 'product'
+
+    let rows = tableWrapper.querySelectorAll('tr')
+
+    rows.forEach((item, index) => {
+      if (index !== 0) {
+        let input = item.querySelectorAll('input')
+        let obj = {
+          sale: []
+        }
+        input.forEach(element => {
+          let arr = element.dataset.chartData.split('-')
+
+          obj[first] = arr[0]
+          obj[second] = arr[1]
+          obj.sale.push(element.value)
+        })
+        let str = first === 'product' ? `${obj[first]}-${obj[second]}` : `${obj[second]}-${obj[first]}`
+        window.localStorage[str] = JSON.stringify(obj)
+      }
+    })
   }
 })

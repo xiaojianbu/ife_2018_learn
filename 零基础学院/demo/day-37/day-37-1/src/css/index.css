@@ -46,3 +46,7 @@ td {
   border-radius: 1px;
   background: rgba(0, 0, 0, 0.2);
 }
+
+table td input {
+  width: 30px;
+}
