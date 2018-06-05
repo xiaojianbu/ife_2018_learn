@@ -59,6 +59,8 @@ export class Bar {
         return Math.ceil(num / 10) * 10
       } else if (num > 100) {
         return Math.ceil(num / 100) * 100
+      } else {
+        return num
       }
     }
 

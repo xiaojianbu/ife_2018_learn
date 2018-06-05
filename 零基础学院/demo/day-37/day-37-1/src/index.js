@@ -88,8 +88,14 @@ tableWrapper.addEventListener('mouseover', function (event) {
 
       return false
     })
-    line.setData([].concat(data[0]))
-    bar.setData([].concat(data[0]))
+    let newData
+    if (localStorage.getItem(`${data[0].product}-${data[0].region}`)) {
+      newData = JSON.parse(localStorage.getItem(`${data[0].product}-${data[0].region}`))
+    } else {
+      newData = data[0]
+    }
+    line.setData([].concat(newData))
+    bar.setData([].concat(newData))
   }
 })
 
@@ -147,5 +153,10 @@ document.querySelector('#save-data').addEventListener('click', () => {
         window.localStorage[str] = JSON.stringify(obj)
       }
     })
+    let data = getDataByChecked()
+
+    renderTable()
+    line.setData(data)
+    bar.setData(data)
   }
 })

@@ -26,21 +26,31 @@ export function getDataByChecked() {
   let data = []
 
   sourceData.forEach(item => {
-    // 从localStorage中获取数据
-    if (localStorage.getItem(`${item.product}-${item.region}`)) {
-      data.push(JSON.parse(localStorage.getItem(`${item.product}-${item.region}`)))
-    } else {
-      if (regionChecked.length && productChecked.length) {
-        if (regionChecked.includes(item.region) &&
-          productChecked.includes(item.product)) {
+    if (regionChecked.length && productChecked.length) {
+      if (regionChecked.includes(item.region) &&
+        productChecked.includes(item.product)) {
+        // 从localStorage中获取数据
+        if (localStorage.getItem(`${item.product}-${item.region}`)) {
+          data.push(JSON.parse(localStorage.getItem(`${item.product}-${item.region}`)))
+        } else {
           data.push(item)
         }
-      } else if (regionChecked.length && !productChecked.length) {
-        if (regionChecked.includes(item.region)) {
+      }
+    } else if (regionChecked.length && !productChecked.length) {
+      if (regionChecked.includes(item.region)) {
+        // 从localStorage中获取数据
+        if (localStorage.getItem(`${item.product}-${item.region}`)) {
+          data.push(JSON.parse(localStorage.getItem(`${item.product}-${item.region}`)))
+        } else {
           data.push(item)
         }
-      } else if (!regionChecked.length && productChecked.length) {
-        if (productChecked.includes(item.product)) {
+      }
+    } else if (!regionChecked.length && productChecked.length) {
+      if (productChecked.includes(item.product)) {
+        // 从localStorage中获取数据
+        if (localStorage.getItem(`${item.product}-${item.region}`)) {
+          data.push(JSON.parse(localStorage.getItem(`${item.product}-${item.region}`)))
+        } else {
           data.push(item)
         }
       }
