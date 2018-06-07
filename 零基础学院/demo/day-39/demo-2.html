@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day-39-demo-2</title>
+</head>
+
+<body>
+  <button id="a">A</button>
+  <button id="b">B</button>
+  <button id="c">C</button>
+
+  <button id="d">D</button>
+  <button id="e">E</button>
+  <button id="f">F</button>
+
+
+  <div id="contABC"></div>
+  <div id="contDEF"></div>
+
+  <script>
+    function getLocationHash() {
+      return location.hash.replace('#', '')
+    }
+
+    function render() {
+      let data = getLocationHash().split('&')
+      let contABC = document.querySelector('#contABC')
+      let contDEF = document.querySelector('#contDEF')
+      if (data[0]) {
+        contABC.innerHTML = data[0].split('=')[1]
+      }
+      if (data[1]) {
+        contDEF.innerHTML = data[1].split('=')[1]
+      }
+    }
+
+    document.querySelectorAll('button').forEach(element => {
+      element.addEventListener('click', () => {
+        let arr = location.hash.split('&')
+        if ('ABC'.includes(element.innerHTML)) {
+          location.hash = `contABC=${element.innerHTML}&` + (arr[1] ? arr[1] : '')
+        } else {
+          location.hash = (arr[0] ? arr[0] : '') + `&contDEF=${element.innerHTML}`
+        }
+      })
+    })
+
+    window.onhashchange = render
+
+    render()
+
+  </script>
+</body>
+
+</html>
