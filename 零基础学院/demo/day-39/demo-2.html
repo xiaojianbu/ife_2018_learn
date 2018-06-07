@@ -22,34 +22,100 @@
   <div id="contDEF"></div>
 
   <script>
-    function getLocationHash() {
-      return location.hash.replace('#', '')
-    }
+    // function getLocationHash() {
+    //   return location.hash.replace('#', '')
+    // }
 
-    function render() {
-      let data = getLocationHash().split('&')
-      let contABC = document.querySelector('#contABC')
-      let contDEF = document.querySelector('#contDEF')
-      if (data[0]) {
-        contABC.innerHTML = data[0].split('=')[1]
-      }
-      if (data[1]) {
-        contDEF.innerHTML = data[1].split('=')[1]
-      }
-    }
+    // function render() {
+    //   let data = getLocationHash()
+    //   let contABC = document.querySelector('#contABC')
+    //   let contDEF = document.querySelector('#contDEF')
+    //   let contABCIndex = data.indexOf('contABC')
+    //   let contDEFIndex = data.indexOf('contDEF')
+    //   if (data.includes('contABC')) {
+    //     contABC.innerHTML = data.substr(contABCIndex + 8, 1)
+    //   } else {
+    //     contABC.innerHTML = ''
+    //   }
+    //   if (data.includes('contDEF')) {
+    //     contDEF.innerHTML = data.substr(contDEFIndex + 8, 1)
+    //   } else {
+    //     contDEF.innerHTML = ''
+    //   }
+    // }
+
+    // document.querySelectorAll('button').forEach(element => {
+    //   element.addEventListener('click', () => {
+    //     let arr = location.hash.split('&')
+    //     let hasContABC = location.hash.includes('contABC')
+    //     let hasContDEF = location.hash.includes('contDEF')
+
+    //     if ('ABC'.includes(element.innerHTML)) {
+    //       location.hash = `contABC=${element.innerHTML}` + (hasContDEF ? '&' + location.hash.slice(location.hash
+    //         .indexOf('contDEF')) : '')
+    //     } else {
+    //       location.hash = (hasContABC && arr[0] ? arr[0] + '&' : '') + `contDEF=${element.innerHTML}`
+    //     }
+    //   })
+    // })
+
+    // window.onhashchange = render
+
+    // render()
+
+    // pushState
+    let contABC = document.querySelector('#contABC')
+    let contDEF = document.querySelector('#contDEF')
 
     document.querySelectorAll('button').forEach(element => {
       element.addEventListener('click', () => {
-        let arr = location.hash.split('&')
-        if ('ABC'.includes(element.innerHTML)) {
-          location.hash = `contABC=${element.innerHTML}&` + (arr[1] ? arr[1] : '')
+        let title = element.innerHTML
+
+        let hasContABC = location.href.split("?")[1] ? location.href.split("?")[1].includes('contABC') : false
+        let hasContDEF = location.href.split("?")[1] ? location.href.split("?")[1].includes('contDEF') : false
+
+        let queryArr = location.href.split("?")[1] ? location.href.split("?")[1].split('&') : []
+
+        let query = ''
+        if ('ABC'.includes(title)) {
+          contABC.innerHTML = title
+          query = `contABC=${element.innerHTML}` + (hasContDEF ? '&' + location.href.split("?")[1].slice(
+            location.href.split("?")[1].indexOf('contDEF')) : '')
         } else {
-          location.hash = (arr[0] ? arr[0] : '') + `&contDEF=${element.innerHTML}`
+          contDEF.innerHTML = title
+          query = (hasContABC && queryArr[0] ? queryArr[0] + '&' : '') + `contDEF=${element.innerHTML}`
         }
+
+        history.pushState({
+          title: title
+        }, title, location.href.split("?")[0] + "?" + query)
       })
     })
 
-    window.onhashchange = render
+    function render() {
+      let query = location.href.split("?")[1]
+      let hasContABC = location.href.split("?")[1] ? location.href.split("?")[1].includes('contABC') : false
+      let hasContDEF = location.href.split("?")[1] ? location.href.split("?")[1].includes('contDEF') : false
+
+      let queryArr = query ? query.split('&') : []
+      if (hasContABC) {
+        contABC.innerHTML = queryArr[0].split('=')[1]
+      } else {
+        contABC.innerHTML = ''
+      }
+      if (hasContDEF) {
+        contDEF.innerHTML = query.slice(query.indexOf('contDEF' + 8))
+      } else {
+        contDEF.innerHTML = ''
+      }
+
+      history.replaceState(null, document.title, location.href.split("?")[0] + (query ? '?' + query : ''))
+    }
+
+
+    window.addEventListener("popstate", function () {
+      render()
+    })
 
     render()
 

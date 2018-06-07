@@ -15,22 +15,47 @@
   <div id="cont"></div>
 
   <script>
-    function getLocationHash() {
-      return location.hash.replace('#', '')
-    }
+    // function getLocationHash() {
+    //   return location.hash.replace('#', '')
+    // }
 
-    function render() {
-      let data = getLocationHash()
-      document.querySelector('#cont').innerHTML = data
-    }
+    // function render() {
+    //   let data = getLocationHash()
+    //   document.querySelector('#cont').innerHTML = data
+    // }
 
+    // document.querySelectorAll('button').forEach(element => {
+    //   element.addEventListener('click', () => {
+    //     location.hash = element.innerHTML
+    //   })
+    // })
+
+    // window.onhashchange = render
+
+    // render()
+
+    // pushState
     document.querySelectorAll('button').forEach(element => {
       element.addEventListener('click', () => {
-        location.hash = element.innerHTML
+        let title = element.innerHTML
+        document.querySelector('#cont').innerHTML = title
+        history.pushState({
+          title: title
+        }, title, location.href.split("?")[0] + "?" + title)
       })
     })
 
-    window.onhashchange = render
+    function render() {
+      let query = location.href.split("?")[1]
+      document.querySelector('#cont').innerHTML = query ? query : ''
+
+      history.replaceState(null, document.title, location.href.split("?")[0] + (query ? '?' + query : ''))
+    }
+
+
+    window.addEventListener("popstate", function () {
+      render()
+    })
 
     render()
 
