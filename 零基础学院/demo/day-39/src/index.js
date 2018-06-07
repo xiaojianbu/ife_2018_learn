@@ -3,7 +3,10 @@ import {
 } from './js/ife31data.js'
 import './css/index.css'
 import {
-  generateCheckbox
+  generateCheckbox,
+  setCheck,
+  clearAllCheckbox,
+  getIdByChecked
 } from './js/checkbox.js'
 import {
   renderTable
@@ -110,12 +113,20 @@ document.querySelector('#checkbox-wrapper').addEventListener('click', (e) => {
   let target = e.target || e.srcElement
 
   if (target.tagName === 'INPUT') {
-    let data = getDataByChecked()
+    let query = ''
+    let checked = getIdByChecked()
 
-    renderTable()
-    tdAddEdit()
-    line.setData(data)
-    bar.setData(data)
+    query += checked.productIds.join(',') ? `product=${checked.productIds.join(',')}` : ''
+
+    if (checked.regionIds.length) {
+      query += query ? `&region=${checked.regionIds.join(',')}` : `region=${checked.regionIds.join(',')}`
+    }
+
+    history.pushState({
+      title: document.title
+    }, document.title, location.href.split('?')[0] + '?' + query)
+
+    render()
   }
 })
 
@@ -145,12 +156,8 @@ document.querySelector('#save-data').addEventListener('click', () => {
         window.localStorage[str] = JSON.stringify(obj)
       }
     })
-    let data = getDataByChecked()
 
-    renderTable()
-    tdAddEdit()
-    line.setData(data)
-    bar.setData(data)
+    render()
   }
 })
 
@@ -163,6 +170,21 @@ document.addEventListener('click', (event) => {
     target.innerHTML = value
   }
 })
+
+function render() {
+  let data = getDataByChecked()
+
+  if (data.length) {
+    renderTable()
+    tdAddEdit()
+    line.setData(data)
+    bar.setData(data)
+  } else {
+    tableWrapper.innerHTML = ''
+    line.setData(eastChinaPhone)
+    bar.setData(eastChinaPhone)
+  }
+}
 
 function tdAddEdit() {
   document.querySelectorAll('td').forEach(element => {
@@ -223,3 +245,40 @@ function tdAddEdit() {
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
+
+window.addEventListener('popstate', function () {
+  clearAllCheckbox()
+  renderData()
+})
+
+function renderData() {
+  let query = decodeURI(location.href.split('?')[1])
+  let hasProduct = query ? query.includes('product') : false
+  let hasRegion = query ? query.includes('region') : false
+
+  let productArr = []
+  let regionArr = []
+
+  if (hasProduct) {
+    let product = query.substring(query.indexOf('product') + 8, query.includes('&') ? query.indexOf('&') : query.length)
+    productArr = product.split(',')
+  }
+  query = decodeURI(location.href.split('?')[1])
+  if (hasRegion) {
+    let region = query.substring(query.indexOf('region') + 7)
+    regionArr = region.split(',')
+  }
+
+  // 根据 ID 选中 checkbox
+  for (let i = 0; i < productArr.length; i++) {
+    setCheck('product-radio-wrapper', document.querySelector(`#${productArr[i]}`))
+  }
+  for (let i = 0; i < regionArr.length; i++) {
+    setCheck('region-radio-wrapper', document.querySelector(`#${regionArr[i]}`))
+  }
+
+  history.replaceState(null, document.title, location.href.split('?')[0] + (query && query !== 'undefined' ? '?' + query : ''))
+  render()
+}
+
+renderData()

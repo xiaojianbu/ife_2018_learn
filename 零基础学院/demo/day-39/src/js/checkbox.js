@@ -1,6 +1,6 @@
 /**
  * 生成一组checkbox
- * @param {String } id checkbox容器的Id
+ * @param {String } id checkbox 容器的 Id
  * @param {Array of Object} data checkbox选项的参数对象或数组
  */
 export function generateCheckbox(id, data) {
@@ -61,5 +61,48 @@ function selectChildOption(id, target) {
     } else {
       document.querySelector(`#${id}-all`).checked = false
     }
+  }
+}
+
+/**
+ * 设置checkbox勾中
+ * @param {String} id
+ * @param {DOM Object} target 当前触发事件对象的引用
+ */
+export function setCheck(id, target) {
+  let allCheckbox = document.querySelectorAll(`input[name="${id}-select"]`)
+
+  target.checked = true
+  if (allCheckbox.length === document.querySelectorAll(`input[name="${id}-select"]:checked`).length) {
+    document.querySelector(`#${id}-all`).checked = true
+  } else {
+    document.querySelector(`#${id}-all`).checked = false
+  }
+}
+
+export function clearAllCheckbox() {
+  let allCheckbox = document.querySelectorAll(`input[type="checkbox"]`)
+  allCheckbox.forEach(item => {
+    item.checked = false
+  })
+}
+
+/**
+ * 返回勾中的checkbox Id
+ */
+export function getIdByChecked() {
+  let regionElements = document.querySelectorAll(
+    'input[name="region-radio-wrapper-select"]:checked'
+  )
+  let productElements = document.querySelectorAll(
+    'input[name="product-radio-wrapper-select"]:checked'
+  )
+
+  let regionIds = [...regionElements].map(item => item.id)
+  let productIds = [...productElements].map(item => item.id)
+
+  return {
+    regionIds,
+    productIds
   }
 }
