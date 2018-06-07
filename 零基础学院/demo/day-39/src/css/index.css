@@ -1,0 +1,58 @@
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+}
+
+.wrapper {
+  height: 30px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.chart-wrapper {
+  display: flex;
+}
+
+.chart {
+  width: 50%;
+  border: 1px solid #000;
+}
+
+#bar-wrapper {
+  min-width: 700px;
+}
+
+.tooltip {
+  display: none;
+  color: #fff;
+  background: rgba(51, 51, 51, 0.75);
+  border-radius: 1px;
+  text-align: center;
+  position: absolute;
+  z-index: 10000;
+  padding: 5px;
+  overflow: visible;
+}
+
+.mask-layer {
+  display: none;
+  z-index: 9000;
+  position: absolute;
+  border-radius: 1px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.span::after {
+  content: '编辑';
+  font-size: 8px;
+  color: #ccc;
+}
+
+table td input {
+  width: 50px;
+}

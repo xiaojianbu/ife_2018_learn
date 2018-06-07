@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .span::after {
+      content: '编辑';
+      font-size: 8px;
+      color: #ccc;
+      /* display: none; */
+    }
+
+    td input {
+      width: 50px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+    <tr>
+      <td>11
+      </td>
+      <td>21
+      </td>
+    </tr>
+    <tr>
+      <td>12
+      </td>
+      <td>22
+      </td>
+    </tr>
+  </table>
+  <div class="tooltip"></div>
+  <script>
+    let value = null
+    let target = null
+    document.querySelectorAll('td').forEach(element => {
+      element.addEventListener('mouseover', (event) => {
+        if (event.target.nodeName === 'TD' && !event.target.innerHTML.includes('input')) {
+          event.target.className = 'span'
+        }
+      })
+      element.addEventListener('mouseout', (event) => {
+        if (event.target.nodeName === 'TD') {
+          event.target.className = ''
+        }
+      })
+      element.addEventListener('click', (event) => {
+        if (event.target.nodeName === 'TD') {
+          if (target !== event.target && document.querySelector('table td input')) {
+            target.innerHTML = value
+          }
+
+          target = event.target
+          value = event.target.innerHTML
+          event.target.className = ''
+          event.target.innerHTML =
+            `<input type="text" value=${event.target.innerHTML}><button class="btn">取消</button><button class="btn">确定</button>`
+
+          event.target.querySelector('input').addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+              target.innerHTML = value
+            }
+            if (event.key === 'Enter') {
+              if (!isNumeric(target.querySelector('input').value)) {
+                alert('请输入数字')
+              } else {
+                target.innerHTML = target.querySelector('input').value
+              }
+            }
+          })
+
+          event.target.querySelectorAll('.btn').forEach(item => {
+            if (item.innerHTML === '取消') {
+              item.addEventListener('click', () => {
+                item.parentElement.innerHTML = value
+              })
+            } else {
+              item.addEventListener('click', () => {
+                if (!isNumeric(item.parentElement.querySelector('input').value)) {
+                  alert('请输入数字')
+                } else {
+                  item.parentElement.innerHTML = item.parentElement.querySelector('input').value
+                }
+              })
+            }
+          })
+        }
+      })
+    })
+
+    document.addEventListener('click', (event) => {
+      let input = document.querySelector('table td input')
+      if (input && target !== event.target && ![...target.childNodes].includes(event.target)) {
+        target.innerHTML = value
+      }
+    })
+
+    function isNumeric(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n)
+    }
+
+  </script>
+</body>
+
+</html>
