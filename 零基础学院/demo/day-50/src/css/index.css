@@ -1,0 +1,65 @@
+.restaurant {
+  display: flex;
+  height: 600px;
+  width: 100%;
+}
+
+.cook-site {
+  width: 200px;
+  border: 1px solid #000;
+  display: flex;
+}
+
+.cook-img {
+  width: 50px;
+  height: 50px;
+  background-image: url("../../assets/img/cook.jpg");
+  background-size: 50px 50px;
+  margin-right: 10px;
+}
+
+#cooker-status {
+  margin-right: 10px;
+}
+
+.cook-menu {
+  border: 1px solid #000;
+}
+
+.aisle {
+  width: 200px;
+  border: 1px solid #000;
+  position: relative;
+}
+
+.waiter {
+  width: 50px;
+  height: 50px;
+  background-image: url("../../assets/img/waiter.jpg");
+  background-size: 50px 50px;
+  position: absolute;
+  top: 30px;
+  left: 0px;
+}
+
+.waiter-info {
+  margin-top: 60px;
+}
+
+.dining-area {
+  border: 1px solid #000;
+  flex-grow: 1;
+}
+
+.customer-img {
+  width: 50px;
+  height: 50px;
+  background-image: url("../../assets/img/customer.jpg");
+  background-size: 50px 50px;
+  margin-right: 10px;
+}
+
+.list {
+  width: 10%;
+  border: 1px solid #000;
+}
