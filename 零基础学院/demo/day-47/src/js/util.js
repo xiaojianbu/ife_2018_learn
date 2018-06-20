@@ -47,6 +47,11 @@ export function getRandomDish(dishmenu) {
   dishes = dishes.filter(item => {
     return !item.includes('0')
   })
+  // 不能不点菜
+  if (dishes.length === 0) {
+    return getRandomDish(dishmenu)
+  }
+
   return dishes.join(';')
 }
 
