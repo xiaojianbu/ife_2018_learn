@@ -21,6 +21,10 @@
       transition: color 1s ease-in;
     }
 
+    .demo-color {
+      color: #00f;
+    }
+
     .liner {
       width: 150px;
       border-bottom: 5px #00f solid;
@@ -29,8 +33,12 @@
       margin-bottom: 50px;
     }
 
+    .liner-transform {
+      transform: rotateY(0deg)
+    }
+
     button {
-      outline:none;
+      outline: none;
       font-weight: bold;
       width: 150px;
       height: 50px;
@@ -53,13 +61,15 @@
 
   <script>
     document.querySelector('button').addEventListener('click', function () {
-      document.querySelector('.demo').style.color = '#00f'
-      document.querySelector('.liner').style.transform = 'rotateY(0deg)'
+      document.querySelector('.demo').classList.toggle('demo-color')
+      document.querySelector('.liner').classList.toggle('liner-transform')
+      // document.querySelector('.demo').style.color = '#00f'
+      // document.querySelector('.liner').style.transform = 'rotateY(0deg)'
     })
-    document.querySelector('.demo').addEventListener('transitionend', function () {
-      document.querySelector('.demo').style.color = '#000'
-      document.querySelector('.liner').style.transform = 'rotateY(90deg)'
-    }, true)
+    // document.querySelector('.demo').addEventListener('transitionend', function () {
+    //   document.querySelector('.demo').style.color = '#000'
+    //   document.querySelector('.liner').style.transform = 'rotateY(90deg)'
+    // }, true)
 
   </script>
 </body>
